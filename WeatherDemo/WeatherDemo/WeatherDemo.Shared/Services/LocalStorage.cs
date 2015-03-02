@@ -47,13 +47,10 @@ namespace WeatherDemo.Services
         {
             var localStorage = ApplicationData.Current.LocalSettings;
 
-            if (localStorage != null)
-            {
-                if (localStorage.Values.ContainsKey(key))
-                    return localStorage.Values[key];
-            }
-            else
-                return null;
+            if (localStorage.Values.ContainsKey(key))
+                return localStorage.Values[key];
+
+            return null;
         }
     }
 }

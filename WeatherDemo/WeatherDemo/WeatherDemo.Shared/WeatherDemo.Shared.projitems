@@ -19,6 +19,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\DateTimeToStringConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\ApiCallType.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Coordinates.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Day.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Location.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\WeatherData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Api.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\LocalStorage.cs" />
   </ItemGroup>

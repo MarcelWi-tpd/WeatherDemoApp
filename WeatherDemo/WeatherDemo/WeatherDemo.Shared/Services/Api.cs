@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -13,24 +16,22 @@ namespace WeatherDemo.Services
     {
         private const string API_ROOT = "http://api.openweathermap.org/data/2.5/";
 
-        public static async Task<WeatherDayData> DownloadWeatherData(string city)
+        public static async Task<Location> DownloadWeatherData(string city)
         {
-            var values = new List<KeyValuePair<string, string>>
-            {
-                new KeyValuePair<string, string>("weather", city)
-            };
+            var weatherDataAsJson = await GetWeatherInfoJsonFromWeb(ApiCallType.Weather, city);
+            // TODO: if succeed: 200 else 404 in "cod"
 
-            var weatherData = GetJsonFromWeb(ApiCallType.Weather, values);
-            return new WeatherDayData();
+            var location = JsonConvert.DeserializeObject<Location>(weatherDataAsJson as String);
+            return location;
         }
 
-        public static async Task<Forecast> DownlaodForecastData()
+        public static async Task<ObservableCollection<Day>> DownlaodForecastData()
         {
 
-            return new Forecast();
+            return new ObservableCollection<Day>();
         }
 
-        private static async Task<object> GetJsonFromWeb(ApiCallType type, List<KeyValuePair<string, string>> parameterList)
+        private static async Task<object> GetWeatherInfoJsonFromWeb(ApiCallType type, string city)
         {
             if (App.IsInternetAvailable)
             {
@@ -38,8 +39,8 @@ namespace WeatherDemo.Services
                 {
                     var httpClient = new HttpClient();
                     httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/html"));
-
-                    HttpResponseMessage response = await httpClient.PostAsync(API_ROOT + type.ToString(), new FormUrlEncodedContent(parameterList));
+                    Debug.WriteLine(type.ToString());
+                    HttpResponseMessage response = await httpClient.GetAsync(API_ROOT + type.ToString() + "?q=" + city);
                     response.EnsureSuccessStatusCode();
 
                     var responseString = await response.Content.ReadAsStringAsync();
