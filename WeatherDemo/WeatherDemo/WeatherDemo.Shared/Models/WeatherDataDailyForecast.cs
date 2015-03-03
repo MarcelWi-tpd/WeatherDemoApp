@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using WeatherDemo.Common;
 
 namespace WeatherDemo.Models
 {
-    public enum ApiCallType
+    public class WeatherDataDailyForecast : BindableBase
     {
-        Weather = 0,
-        Forecast = 1,
-        ForeCastDaily = 2
     }
 }

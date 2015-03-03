@@ -52,16 +52,7 @@ namespace WeatherDemo.Models
             }
         }
 
-        private ObservableCollection<Day> _DayList;
-
-        public ObservableCollection<Day> DayList
-        {
-            get { return _DayList ?? (_DayList = new ObservableCollection<Day>()); }
-            set
-            {
-                SetProperty(ref _DayList, value);
-            }
-        }
+        public WeatherData TodaysWeatherData { get; set; }
         
         #endregion
         public Location(int locationId, string name, string country, Coordinates coord)

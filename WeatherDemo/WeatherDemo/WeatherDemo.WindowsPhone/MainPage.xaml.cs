@@ -39,7 +39,7 @@ namespace WeatherDemo
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
 
-            await Api.DownloadWeatherData("Cologne");
+            await Api.DownlaodForecastData("Cologne", ApiCallType.Forecast);
             // TODO: Prepare page for display here.
 
             // TODO: If your application contains multiple pages, ensure that you are
