@@ -29,6 +29,7 @@ namespace WeatherDemo
 #if WINDOWS_PHONE_APP
         private TransitionCollection transitions;
 #endif
+        public const double KELVINTOCELSIUS = 273.15;
         public static bool IsInternetAvailable
         {
             get

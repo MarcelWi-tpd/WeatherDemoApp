@@ -36,18 +36,13 @@ namespace WeatherDemo.Services
             switch(type)
             {
                 case ApiCallType.Forecast:
-                    weatherDataForecastAsJson = await GetWeatherInfoJsonFromWeb("forecast?q=", city); break;
+                    weatherDataForecastAsJson = await GetWeatherInfoJsonFromWeb("forecast?q=", city);
+                    JObject jsonObjectForWeatherList = JObject.Parse(weatherDataForecastAsJson as String);
+                    ObservableCollection<WeatherData> forecastList = JsonConvert.DeserializeObject<ObservableCollection<WeatherData>>(jsonObjectForWeatherList["list"].ToString());
+                    break;
                 case ApiCallType.ForeCastDaily:
-                    weatherDataForecastAsJson = await GetWeatherInfoJsonFromWeb("forecast/daily?q=", city); break;
-            }
-            try
-            {
-                JObject jsonObjectForWeatherList = JObject.Parse(weatherDataForecastAsJson as String);
-                ObservableCollection<WeatherData> forecastList = JsonConvert.DeserializeObject<ObservableCollection<WeatherData>>(jsonObjectForWeatherList["list"].ToString());
-            }
-            catch (JsonSerializationException e)
-            {
-                Debug.WriteLine(e.ToString());
+                    weatherDataForecastAsJson = await GetWeatherInfoJsonFromWeb("forecast/daily?q=", city);
+                    break;
             }
                 
             return new ObservableCollection<Day>();

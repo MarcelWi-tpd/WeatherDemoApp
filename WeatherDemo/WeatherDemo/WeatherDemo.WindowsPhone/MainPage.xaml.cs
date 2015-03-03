@@ -38,7 +38,7 @@ namespace WeatherDemo
         /// This parameter is typically used to configure the page.</param>
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-
+            await Api.DownloadWeatherData("Cologne");
             await Api.DownlaodForecastData("Cologne", ApiCallType.Forecast);
             // TODO: Prepare page for display here.
 

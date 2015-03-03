@@ -94,11 +94,11 @@ namespace WeatherDemo.Models
 
         public Main(double temp, int humidity, double pressure, double temp_min, double temp_max)
         {
-            Temperature = temp;
+            Temperature = Math.Round(temp - App.KELVINTOCELSIUS, 2);
             Humidity = humidity;
             Pressure = pressure;
-            MinTemperature = temp_min;
-            MaxTemperature = temp_max;
+            MinTemperature = Math.Round(temp_min - App.KELVINTOCELSIUS, 2);
+            MaxTemperature = Math.Round(temp_max - App.KELVINTOCELSIUS, 2);
         }
     }
 
