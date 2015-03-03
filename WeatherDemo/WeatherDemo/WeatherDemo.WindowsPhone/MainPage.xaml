@@ -1,14 +1,50 @@
 ﻿<Page
-    x:Class="WeatherDemo.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:WeatherDemo"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    xmlns:Converters="using:WeatherDemo.Converters"
+    x:Class="WeatherDemo.MainPage"
+    mc:Ignorable="d" Background="White" Foreground="Black">
 
-    <Grid>
+	<Page.Resources>
+		<Converters:IntToNegatedVisibilityConverter x:Key="IntToNegatedVisibilityConverter"/>
+		<Converters:IntToVisibilityConverter x:Key="IntToVisibilityConverter"/>
+	</Page.Resources>
+    
+    <Page.BottomAppBar>
+        <CommandBar Foreground="Black" Background="White">
+            <AppBarButton x:Name="AddLocation" Label="Ort hinzufügen" Click="AddLocation_Click" Icon="Add"  />
+        </CommandBar>
+    </Page.BottomAppBar>
 
-    </Grid>
+    <Page.DataContext>
+        <Binding Path="Current" Source="{StaticResource MainViewModel}"/>
+    </Page.DataContext>
+	<Grid x:Name="RootGrid">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="60*"/>
+			<RowDefinition Height="578*"/>
+		</Grid.RowDefinitions>
+		<Grid x:Name="HeaderGrid" Margin="12,0" VerticalAlignment="Top" Height="60">
+			<TextBlock x:Name="AppTitle" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,12,0" Text="WETTERINFORMATIONEN" FontSize="16" FontWeight="Bold"/>
+		</Grid>
+        
+        
+        
+		<Grid x:Name="LocationGrid" Grid.Row="1" Margin="12,0,0,0">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="50*"/>
+				<RowDefinition Height="529*"/>
+			</Grid.RowDefinitions>
+			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Meine Orte" VerticalAlignment="Top" Margin="0" FontSize="32"/>
+			<TextBlock x:Name="NoLocationFoundMessage" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="1" FontSize="21.333" Visibility="{Binding Current.LocationCollection, Converter={StaticResource IntToVisibilityConverter}}" Text="Keine Orte gefunden. Es müssen erst Orte angelegt werden, um hier aktuelle Informationen zum Wetter anzeigen zu lassen."/>
+			<ListView x:Name="LocationListView" 
+				Grid.Row="1" ItemsSource="{Binding LocationCollection}" Visibility="{Binding Current.LocationCollection, Converter={StaticResource IntToNegatedVisibilityConverter}}"/>
+		</Grid>
+        
+        
+        
+	</Grid>
 </Page>
