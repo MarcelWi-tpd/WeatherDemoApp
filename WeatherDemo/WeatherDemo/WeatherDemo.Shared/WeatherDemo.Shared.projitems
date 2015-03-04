@@ -33,5 +33,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\LocalStorage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MainViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\AddLocation.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\WeatherDetails.cs" />
   </ItemGroup>
 </Project>

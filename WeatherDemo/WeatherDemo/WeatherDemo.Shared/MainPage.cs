@@ -98,6 +98,15 @@ namespace WeatherDemo
             MainViewModel.Current.LocationCollection.Remove(dataContext as Location);
 
             await App.SaveLocationsInLocalXml(MainViewModel.Current.LocationCollection);
-        } 
+        }
+
+        private void LocationListView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            if ((e.ClickedItem as Location) == null)
+                return;
+
+            MainViewModel.Current.CurrentLocation = (e.ClickedItem as Location);
+            Frame.Navigate(typeof(WeatherDetails));
+        }
     }
 }

@@ -88,6 +88,9 @@
     <Compile Include="Views\AddLocation.xaml.cs">
       <DependentUpon>AddLocation.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\WeatherDetails.xaml.cs">
+      <DependentUpon>WeatherDetails.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -111,6 +114,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\AddLocation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WeatherDetails.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

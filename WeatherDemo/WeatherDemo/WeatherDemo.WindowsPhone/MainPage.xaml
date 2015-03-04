@@ -92,7 +92,7 @@
                 ItemsSource="{Binding LocationCollection}" 
                 ItemTemplate="{StaticResource LocationItemTemplate}"
                 Visibility="{Binding Current.LocationCollection.Count, Converter={StaticResource IntToVisibilityConverter}, Mode=OneWay}"
-                IsItemClickEnabled="True">
+                IsItemClickEnabled="True" ItemClick="LocationListView_ItemClick">
                 <ListView.ItemsPanel>
                     <ItemsPanelTemplate>
                         <ItemsWrapGrid
