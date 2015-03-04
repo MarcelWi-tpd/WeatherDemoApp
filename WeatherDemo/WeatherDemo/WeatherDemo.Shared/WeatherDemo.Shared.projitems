@@ -16,9 +16,13 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Common\BindableBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\NavigationHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\RelayCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\SuspensionManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\DateTimeToStringConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\IntToVisibilityConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)MainPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\ApiCallType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Coordinates.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Day.cs" />
@@ -28,5 +32,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Services\Api.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\LocalStorage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MainViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Views\AddLocation.cs" />
   </ItemGroup>
 </Project>

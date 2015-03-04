@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:Converters="using:WeatherDemo.Converters"
     x:Class="WeatherDemo.MainPage"
-    mc:Ignorable="d" Background="White" Foreground="Black">
+    mc:Ignorable="d" Background="White" Foreground="Black" Loaded="Page_Loaded">
 
 	<Page.Resources>
 		<Converters:IntToNegatedVisibilityConverter x:Key="IntToNegatedVisibilityConverter"/>
@@ -39,9 +39,11 @@
 				<RowDefinition Height="529*"/>
 			</Grid.RowDefinitions>
 			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Meine Orte" VerticalAlignment="Top" Margin="0" FontSize="32"/>
-			<TextBlock x:Name="NoLocationFoundMessage" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="1" FontSize="21.333" Visibility="{Binding Current.LocationCollection, Converter={StaticResource IntToVisibilityConverter}}" Text="Keine Orte gefunden. Es müssen erst Orte angelegt werden, um hier aktuelle Informationen zum Wetter anzeigen zu lassen."/>
+			<TextBlock x:Name="NoLocationFoundMessage" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="1" FontSize="21.333" Visibility="{Binding Current.LocationCollection.Count, Converter={StaticResource IntToNegatedVisibilityConverter}, Mode=OneWay}" Text="Keine Orte gefunden. Es müssen erst Orte angelegt werden, um hier aktuelle Informationen zum Wetter anzeigen zu lassen."/>
 			<ListView x:Name="LocationListView" 
-				Grid.Row="1" ItemsSource="{Binding LocationCollection}" Visibility="{Binding Current.LocationCollection, Converter={StaticResource IntToNegatedVisibilityConverter}}"/>
+				Grid.Row="1" 
+                ItemsSource="{Binding LocationCollection}" 
+                Visibility="{Binding Current.LocationCollection.Count, Converter={StaticResource IntToVisibilityConverter}, Mode=OneWay}"/>
 		</Grid>
         
         

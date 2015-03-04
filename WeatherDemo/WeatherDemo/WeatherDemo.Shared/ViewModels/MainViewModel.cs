@@ -1,9 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
+using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 using WeatherDemo.Common;
 using WeatherDemo.Models;
+using WeatherDemo.Services;
+using System.Xml.Linq;
+using Windows.Data.Xml.Dom;
 
 namespace WeatherDemo.ViewModels
 {
@@ -32,6 +38,6 @@ namespace WeatherDemo.ViewModels
         public MainViewModel()
         {
             _Current = this;
-        } 
+        }
     }
 }

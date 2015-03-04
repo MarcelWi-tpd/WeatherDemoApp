@@ -10,9 +10,9 @@
 
     <Page.BottomAppBar>
         <CommandBar Foreground="Black" Background="White">
-            <AppBarButton x:Name="Save" Label="speichern" Icon="Save"  />
-            <AppBarButton x:Name="CurrentLocation" Label="Ortung" Icon="Map"  />
-            <AppBarButton x:Name="Cancel" Label="abbrechen" Icon="Cancel"  />
+            <AppBarButton x:Name="Save" Label="speichern" Icon="Save" Click="Save_Click"  />
+            <AppBarButton x:Name="CurrentLocation" Label="Ortung" Icon="Map" Click="CurrentLocation_Click"  />
+            <AppBarButton x:Name="Cancel" Label="abbrechen" Icon="Cancel" Click="Cancel_Click"  />
         </CommandBar>
     </Page.BottomAppBar>
 
@@ -36,9 +36,9 @@
             <StackPanel Grid.Row="1">
                 <TextBlock Text="Bitte in eines der untenstehenden Felder entweder die Postleitzahl oder den Namen des Ortes eingeben." Margin="0,12" TextWrapping="Wrap" FontSize="18" />
                 <TextBlock Text="Postleitzahl" FontSize="20" FontWeight="Bold" />
-                <TextBox InputScope="Number" VerticalAlignment="Center" />
+                <TextBox x:Name="tbxPlz" InputScope="Number" VerticalAlignment="Center" />
                 <TextBlock Text="Names des Ortes" FontSize="20" FontWeight="Bold" />
-                <TextBox VerticalAlignment="Center"  />
+                <TextBox x:Name="tbxPlace" VerticalAlignment="Center"  />
             </StackPanel>
         </Grid>
 

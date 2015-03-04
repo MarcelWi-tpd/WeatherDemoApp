@@ -14,6 +14,10 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using WeatherDemo.Models;
 using WeatherDemo.Services;
+using System.Collections.ObjectModel;
+using Windows.Data.Xml.Dom;
+using Windows.UI.Popups;
+using WeatherDemo.ViewModels;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -38,20 +42,48 @@ namespace WeatherDemo
         /// This parameter is typically used to configure the page.</param>
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            await Api.DownloadWeatherData("Cologne");
-            await Api.DownlaodForecastData("Cologne", ApiCallType.Forecast);
-            // TODO: Prepare page for display here.
-
-            // TODO: If your application contains multiple pages, ensure that you are
-            // handling the hardware Back button by registering for the
-            // Windows.Phone.UI.Input.HardwareButtons.BackPressed event.
-            // If you are using the NavigationHelper provided by some templates,
-            // this event is handled for you.
+            if (LocalStorage.GetSetting("LocationConsent") == null ||
+                (bool) LocalStorage.GetSetting("LocationConsent") == false)
+            {
+                var messageDialog =
+                    new MessageDialog(
+                        "Um die Wetterinformationen für den aktuellen Standort abzurufen muss die Ortung erlaubt werden. Ortung erlauben?",
+                        "Ortung erlauben");
+                messageDialog.Commands.Add(new UICommand("Ja", command =>
+                {
+                    LocalStorage.SaveSetting("LocationConsent", true);
+                }));
+                messageDialog.Commands.Add(new UICommand("Nein", command =>
+                {
+                    LocalStorage.SaveSetting("LocationConsent", false);
+                }));
+                await messageDialog.ShowAsync();
+            }
+            LoadLocalLocation();
         }
 
-        private void AddLocation_Click(object sender, RoutedEventArgs e)
+
+        //TODO: zurück in MainViewModel, aber es kam eine Exception - aus Zeitgründen vorerst hierher verschoben
+        private async void LoadLocalLocation()
         {
+            var tempLocationList = new ObservableCollection<Location>();
+            var localLocationAsXml = await LocalStorage.GetJsonFromLocalStorage("userLocation.xml");
+            if (localLocationAsXml == null)
+                return;
 
-        }
+            XmlDocument xmlLocations = new XmlDocument();
+            xmlLocations.LoadXml(localLocationAsXml);
+
+            var locationList = xmlLocations.SelectNodes("Locations/Location/name");
+
+            foreach (XmlElement xmlLocation in locationList)
+            {
+                var location = await Api.DownloadWeatherData(xmlLocation.InnerText.Trim());
+                tempLocationList.Add(location);
+            }
+
+            MainViewModel.Current.LocationCollection = tempLocationList;
+
+        } 
     }
 }
