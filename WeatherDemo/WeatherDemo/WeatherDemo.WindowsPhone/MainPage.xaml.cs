@@ -34,48 +34,5 @@ namespace WeatherDemo
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
         }
-
-        /// <summary>
-        /// Invoked when this page is about to be displayed in a Frame.
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.
-        /// This parameter is typically used to configure the page.</param>
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
-        {
-            LoadLocalLocation();
-        }
-
-
-        //TODO: zurück in MainViewModel, aber es kam eine Exception - aus Zeitgründen vorerst hierher verschoben
-        private async void LoadLocalLocation()
-        {
-            var tempLocationList = new ObservableCollection<Location>();
-            var localLocationAsXml = await LocalStorage.GetJsonFromLocalStorage("userLocation.xml");
-            if (localLocationAsXml == null || String.IsNullOrEmpty(localLocationAsXml))
-                return;
-
-            XmlDocument xmlLocations = new XmlDocument();
-            xmlLocations.LoadXml(localLocationAsXml);
-
-            var locationList = xmlLocations.SelectNodes("Locations/Location");
-
-            foreach (XmlElement xmlLocation in locationList)
-            {
-                string name = xmlLocation.SelectSingleNode("Name").InnerText.Trim();
-                string country = xmlLocation.SelectSingleNode("Country").InnerText.Trim();
-                var location = await Api.DownloadWeatherData("weather?q=" + name + "," + country);
-
-                if (location == null)
-                {
-                    location = new Location(name, country);
-                } else
-                    location.Country = country;
-
-                tempLocationList.Add(location);
-            }
-
-            MainViewModel.Current.LocationCollection = new ObservableCollection<Location>(tempLocationList);
-
-        } 
     }
 }

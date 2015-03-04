@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Xml.Linq;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
@@ -16,6 +18,10 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+using WeatherDemo.Models;
+using WeatherDemo.Services;
+using WeatherDemo.ViewModels;
+using System.Threading.Tasks;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
@@ -145,6 +151,23 @@ namespace WeatherDemo
 
             // TODO: Save application state and stop any background activity
             deferral.Complete();
+        }
+
+        public static async Task SaveLocationsInLocalXml(ObservableCollection<Location> locationCollection)
+        {
+            XDocument xmlLocations = new XDocument();
+            XElement xmlRoot = new XElement("Locations");
+            xmlLocations.Add(xmlRoot);
+
+            foreach (Location locationInCollection in MainViewModel.Current.LocationCollection)
+            {
+                XElement xmlElement = new XElement("Location");
+                xmlElement.Add(new XElement("Name", locationInCollection.Name));
+                xmlElement.Add(new XElement("Country", locationInCollection.TodaysWeatherData.Sys.Country));
+                xmlRoot.Add(xmlElement);
+            }
+
+            await LocalStorage.SaveJsonToLocalStorage("userLocation.xml", xmlLocations.ToString());
         }
     }
 }

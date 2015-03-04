@@ -71,18 +71,24 @@ namespace WeatherDemo.Views
 
         private async void Save_Click(object sender, RoutedEventArgs e)
         {
-            if (tbxPlz.Text.Length > 0 && tbxPlace.Text.Length > 0)
+            if (String.IsNullOrEmpty(tbxPlz.Text.Trim()) && String.IsNullOrEmpty(tbxPlace.Text.Trim()) || tbxPlz.Text.Length > 0 && tbxPlace.Text.Length > 0)
             {
                 var messageDialog =
                     new MessageDialog(
-                        "In der Demo ist nur eine Eingabe erlaubt. Bitte suche entweder nach der Postleitzahl oder einem Ort.",
+                        "In der Demo muss genau ein Feld ausgefüllt werden. Es wurde gar keins oder zu viele Felder ausgefüllt. Bitte die Eingabe wiederholen.",
                         "Fehlerhafte Eingabe");
                 messageDialog.Commands.Add(new UICommand("OK"));
                 await messageDialog.ShowAsync();
             }
             else
             {
-                var location = await Api.DownloadWeatherData("weather?q=" + tbxPlace.Text.Trim());
+                string query = "";
+                if (!String.IsNullOrEmpty(tbxPlace.Text.Trim()))
+                    query = tbxPlace.Text.Trim();
+                else
+                    query = tbxPlz.Text.Trim();
+
+                var location = await Api.DownloadWeatherData("weather?q=" + query);
 
                 if (location == null)
                 {
@@ -164,19 +170,7 @@ namespace WeatherDemo.Views
             location.Country = location.TodaysWeatherData.Sys.Country;
             MainViewModel.Current.LocationCollection.Add(location);
 
-            XDocument xmlLocations = new XDocument();
-            XElement xmlRoot = new XElement("Locations");
-            xmlLocations.Add(xmlRoot);
-
-            foreach (Location locationInCollection in MainViewModel.Current.LocationCollection)
-            {
-                XElement xmlElement = new XElement("Location");
-                xmlElement.Add(new XElement("Name", locationInCollection.Name));
-                xmlElement.Add(new XElement("Country", locationInCollection.TodaysWeatherData.Sys.Country));
-                xmlRoot.Add(xmlElement);
-            }
-
-            await LocalStorage.SaveJsonToLocalStorage("userLocation.xml", xmlLocations.ToString());
+            await App.SaveLocationsInLocalXml(MainViewModel.Current.LocationCollection);
         }
     }
 }

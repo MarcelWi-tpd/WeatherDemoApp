@@ -10,6 +10,8 @@ using WeatherDemo.Models;
 using WeatherDemo.Services;
 using System.Xml.Linq;
 using Windows.Data.Xml.Dom;
+using System.Threading.Tasks;
+using Windows.UI.Core;
 
 namespace WeatherDemo.ViewModels
 {
@@ -38,6 +40,7 @@ namespace WeatherDemo.ViewModels
         public MainViewModel()
         {
             _Current = this;
+
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
             {
                 var loc = new Location(0, "Cologne", "GER", new Coordinates(49, 122));
@@ -49,7 +52,6 @@ namespace WeatherDemo.ViewModels
                 data.Wind = wind;
                 data.Sys = sys;
                 loc.TodaysWeatherData = data;
-                LocationCollection.Add(loc);
             }
         }
     }

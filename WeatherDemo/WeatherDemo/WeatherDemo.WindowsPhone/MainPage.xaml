@@ -14,8 +14,12 @@
 		<Converters:IntToNegatedVisibilityConverter x:Key="IntToNegatedVisibilityConverter"/>
 		<Converters:IntToVisibilityConverter x:Key="IntToVisibilityConverter"/>
 
+        <MenuFlyout x:Key="deleteLocation">
+            <MenuFlyoutItem x:Name="DeleteLocationFlayFlyoutItem" Text="Löschen" Click="DeleteLocationFlayFlyoutItem_Click"></MenuFlyoutItem>
+        </MenuFlyout>
+        
         <DataTemplate x:Key="LocationItemTemplate">
-            <Border BorderThickness="1" Margin="0,0,10,10" Opacity="0.85">
+            <Border BorderThickness="1" Margin="0,0,10,10" Opacity="0.85" Holding="Border_Holding"  FlyoutBase.AttachedFlyout="{StaticResource deleteLocation}">
             	<Border.Background>
             		<ImageBrush ImageSource="ms-appx:/Assets/TileBackground/500.jpg" Stretch="Fill"/>
             	</Border.Background>
