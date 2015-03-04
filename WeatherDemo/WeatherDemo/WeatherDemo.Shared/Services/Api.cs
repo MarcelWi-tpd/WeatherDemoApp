@@ -17,13 +17,19 @@ namespace WeatherDemo.Services
     {
         private const string API_ROOT = "http://api.openweathermap.org/data/2.5/";
 
-        public static async Task<Location> DownloadWeatherData(string city)
+        public static async Task<Location> DownloadWeatherData(string values)
         {
-            var weatherDataAsJson = await GetWeatherInfoJsonFromWeb("weather?q=", city);
+            var weatherDataAsJson = await GetWeatherInfoJsonFromWeb(values);
+
+            if (weatherDataAsJson == null)
+                return null;
+
             // TODO: if succeed: 200 else 404 in "cod"
+
 
             // convert data relevant for current location
             var location = JsonConvert.DeserializeObject<Location>(weatherDataAsJson as String);
+
             // convert data relevant for current weather
             location.TodaysWeatherData = JsonConvert.DeserializeObject<WeatherData>(weatherDataAsJson as String);
 
@@ -36,19 +42,19 @@ namespace WeatherDemo.Services
             switch(type)
             {
                 case ApiCallType.Forecast:
-                    weatherDataForecastAsJson = await GetWeatherInfoJsonFromWeb("forecast?q=", city);
+                    weatherDataForecastAsJson = await GetWeatherInfoJsonFromWeb("forecast?q=" + city);
                     JObject jsonObjectForWeatherList = JObject.Parse(weatherDataForecastAsJson as String);
                     ObservableCollection<WeatherData> forecastList = JsonConvert.DeserializeObject<ObservableCollection<WeatherData>>(jsonObjectForWeatherList["list"].ToString());
                     break;
                 case ApiCallType.ForeCastDaily:
-                    weatherDataForecastAsJson = await GetWeatherInfoJsonFromWeb("forecast/daily?q=", city);
+                    weatherDataForecastAsJson = await GetWeatherInfoJsonFromWeb("forecast/daily?q=" + city);
                     break;
             }
                 
             return new ObservableCollection<Day>();
         }
 
-        private static async Task<object> GetWeatherInfoJsonFromWeb(string parameter, string city)
+        private static async Task<object> GetWeatherInfoJsonFromWeb(string parameter)
         {
             if (App.IsInternetAvailable)
             {
@@ -57,7 +63,7 @@ namespace WeatherDemo.Services
                     var httpClient = new HttpClient();
                     httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("text/html"));
                     Debug.WriteLine(parameter);
-                    HttpResponseMessage response = await httpClient.GetAsync(API_ROOT + parameter + city);
+                    HttpResponseMessage response = await httpClient.GetAsync(API_ROOT + parameter);
                     response.EnsureSuccessStatusCode();
 
                     var responseString = await response.Content.ReadAsStringAsync();

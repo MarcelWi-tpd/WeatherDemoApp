@@ -61,8 +61,16 @@ namespace WeatherDemo
 
             foreach (XmlElement xmlLocation in locationList)
             {
-                var location = await Api.DownloadWeatherData(xmlLocation.SelectSingleNode("Name").InnerText.Trim());
-                location.Country = xmlLocation.SelectSingleNode("Country").InnerText.Trim();
+                string name = xmlLocation.SelectSingleNode("Name").InnerText.Trim();
+                string country = xmlLocation.SelectSingleNode("Country").InnerText.Trim();
+                var location = await Api.DownloadWeatherData("weather?q=" + name + "," + country);
+
+                if (location == null)
+                {
+                    location = new Location(name, country);
+                } else
+                    location.Country = country;
+
                 tempLocationList.Add(location);
             }
 

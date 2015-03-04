@@ -82,9 +82,9 @@ namespace WeatherDemo.Views
             }
             else
             {
-                var location = await Api.DownloadWeatherData(tbxPlace.Text.Trim());
+                var location = await Api.DownloadWeatherData("weather?q=" + tbxPlace.Text.Trim());
 
-                if (location.Name == null)
+                if (location == null)
                 {
                     var messageDialog =
                         new MessageDialog(
@@ -123,9 +123,9 @@ namespace WeatherDemo.Views
                     return;
                 }
 
-                var location = await Api.DownloadWeatherData(tbxPlace.Text.Trim());
+                var location = await Api.DownloadWeatherData("weather?lat=" + latitude + "&lon=" + longitude);
 
-                if (location.Name == null)
+                if (location == null)
                 {
                     ErrorMessageForGpsLocation();
                     return;
@@ -139,7 +139,7 @@ namespace WeatherDemo.Views
             {
                 var messageDialog =
                     new MessageDialog(
-                        "Der Standort kann nicht ermittelt werden. Dei Ortung für diese App muss erlaubt werden.",
+                        "Der Standort kann nicht ermittelt werden. Die Ortung für diese App muss erlaubt werden.",
                         "Verweigerte Ortung");
                 messageDialog.Commands.Add(new UICommand("OK"));
                 await messageDialog.ShowAsync();
@@ -160,6 +160,8 @@ namespace WeatherDemo.Views
 
         private async void SaveLocationLocalAndAddToCollection(Location location)
         {
+            //Aufgrund des Aufbaus des JSON muss Country hier einmal manuell beschrieben werden
+            location.Country = location.TodaysWeatherData.Sys.Country;
             MainViewModel.Current.LocationCollection.Add(location);
 
             XDocument xmlLocations = new XDocument();

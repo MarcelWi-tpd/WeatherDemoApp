@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics.Contracts;
 using System.Text;
+using Newtonsoft.Json;
 using WeatherDemo.Common;
 
 namespace WeatherDemo.Models
@@ -53,7 +54,13 @@ namespace WeatherDemo.Models
         }
 
         public WeatherData TodaysWeatherData { get; set; }
-        
+
+        [JsonConstructor]
+        public Location(string name, string country)
+        {
+            Name = name;
+            Country = country;
+        }
         #endregion
         public Location(int locationId, string name, string country, Coordinates coord)
         {
