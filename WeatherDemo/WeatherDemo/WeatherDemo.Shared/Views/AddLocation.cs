@@ -118,12 +118,18 @@ namespace WeatherDemo.Views
                 var longitude = devicePosition.Coordinate.Longitude.ToString("0.00");
 
                 if (latitude == null || longitude == null)
+                {
                     ErrorMessageForGpsLocation();
+                    return;
+                }
 
                 var location = await Api.DownloadWeatherData(tbxPlace.Text.Trim());
 
-                if (location == null)
+                if (location.Name == null)
+                {
                     ErrorMessageForGpsLocation();
+                    return;
+                }
 
                 SaveLocationLocalAndAddToCollection(location);
                 if (Frame.CanGoBack)
@@ -163,7 +169,8 @@ namespace WeatherDemo.Views
             foreach (Location locationInCollection in MainViewModel.Current.LocationCollection)
             {
                 XElement xmlElement = new XElement("Location");
-                xmlElement.Add(new XElement("name", locationInCollection.Name));
+                xmlElement.Add(new XElement("Name", locationInCollection.Name));
+                xmlElement.Add(new XElement("Country", locationInCollection.TodaysWeatherData.Sys.Country));
                 xmlRoot.Add(xmlElement);
             }
 

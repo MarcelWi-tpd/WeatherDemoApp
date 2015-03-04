@@ -94,17 +94,28 @@ namespace WeatherDemo.Models
 
         public Main(double temp, int humidity, double pressure, double temp_min, double temp_max)
         {
-            Temperature = Math.Round(temp - App.KELVINTOCELSIUS, 2);
+            Temperature = Math.Round(temp - App.KELVINTOCELSIUS, 0);
             Humidity = humidity;
             Pressure = pressure;
-            MinTemperature = Math.Round(temp_min - App.KELVINTOCELSIUS, 2);
-            MaxTemperature = Math.Round(temp_max - App.KELVINTOCELSIUS, 2);
+            MinTemperature = Math.Round(temp_min - App.KELVINTOCELSIUS, 0);
+            MaxTemperature = Math.Round(temp_max - App.KELVINTOCELSIUS, 0);
         }
     }
 
     public class Sys : BindableBase
     {
         #region properties
+        private string _Country;
+        [JsonProperty(PropertyName = "country")]
+        public string Country
+        {
+            get { return _Country; }
+            set
+            {
+                SetProperty(ref _Country, value);
+            }
+        }
+
         private DateTime _Sunrise;
         [JsonProperty(PropertyName = "sunrise")]
         public DateTime Sunrise
@@ -128,8 +139,9 @@ namespace WeatherDemo.Models
         }
         #endregion
 
-        public Sys(int sunrise, int sunset)
+        public Sys(int sunrise, int sunset, string country)
         {
+            Country = country;
             Sunrise = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc).AddSeconds(sunrise).ToLocalTime();
             Sunset = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc).AddSeconds(sunset).ToLocalTime();
         }

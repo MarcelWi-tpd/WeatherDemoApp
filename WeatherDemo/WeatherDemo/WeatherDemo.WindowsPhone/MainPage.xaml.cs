@@ -42,23 +42,6 @@ namespace WeatherDemo
         /// This parameter is typically used to configure the page.</param>
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            if (LocalStorage.GetSetting("LocationConsent") == null ||
-                (bool) LocalStorage.GetSetting("LocationConsent") == false)
-            {
-                var messageDialog =
-                    new MessageDialog(
-                        "Um die Wetterinformationen für den aktuellen Standort abzurufen muss die Ortung erlaubt werden. Ortung erlauben?",
-                        "Ortung erlauben");
-                messageDialog.Commands.Add(new UICommand("Ja", command =>
-                {
-                    LocalStorage.SaveSetting("LocationConsent", true);
-                }));
-                messageDialog.Commands.Add(new UICommand("Nein", command =>
-                {
-                    LocalStorage.SaveSetting("LocationConsent", false);
-                }));
-                await messageDialog.ShowAsync();
-            }
             LoadLocalLocation();
         }
 
@@ -68,21 +51,22 @@ namespace WeatherDemo
         {
             var tempLocationList = new ObservableCollection<Location>();
             var localLocationAsXml = await LocalStorage.GetJsonFromLocalStorage("userLocation.xml");
-            if (localLocationAsXml == null)
+            if (localLocationAsXml == null || String.IsNullOrEmpty(localLocationAsXml))
                 return;
 
             XmlDocument xmlLocations = new XmlDocument();
             xmlLocations.LoadXml(localLocationAsXml);
 
-            var locationList = xmlLocations.SelectNodes("Locations/Location/name");
+            var locationList = xmlLocations.SelectNodes("Locations/Location");
 
             foreach (XmlElement xmlLocation in locationList)
             {
-                var location = await Api.DownloadWeatherData(xmlLocation.InnerText.Trim());
+                var location = await Api.DownloadWeatherData(xmlLocation.SelectSingleNode("Name").InnerText.Trim());
+                location.Country = xmlLocation.SelectSingleNode("Country").InnerText.Trim();
                 tempLocationList.Add(location);
             }
 
-            MainViewModel.Current.LocationCollection = tempLocationList;
+            MainViewModel.Current.LocationCollection = new ObservableCollection<Location>(tempLocationList);
 
         } 
     }
