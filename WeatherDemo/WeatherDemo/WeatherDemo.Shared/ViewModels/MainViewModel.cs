@@ -66,6 +66,9 @@ namespace WeatherDemo.ViewModels
                 data.Wind = wind;
                 data.Sys = sys;
                 loc.TodaysWeatherData = data;
+
+                CurrentLocation = loc;
+                CurrentLocation.TodaysWeatherData = data;
             }
         }
     }

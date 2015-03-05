@@ -41,5 +41,24 @@ namespace WeatherDemo.Converters
         {
             return new NotImplementedException();
         }
-    }  
+    }
+
+    public class DateTimeToTimeStringConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, string language)
+        {
+            if (value is DateTime)
+            {
+                DateTime date = (DateTime)value;
+                return date.ToString("HH:mm");
+            }
+
+            return null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, string language)
+        {
+            return new NotImplementedException();
+        }
+    } 
 }
