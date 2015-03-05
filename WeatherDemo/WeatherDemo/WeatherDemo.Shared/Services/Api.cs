@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
 using WeatherDemo.Models;
+using WeatherDemo.ViewModels;
 
 namespace WeatherDemo.Services
 {
@@ -36,23 +37,30 @@ namespace WeatherDemo.Services
             return location;
         }
 
-        public static async Task<ObservableCollection<Day>> DownlaodForecastData(string city, ApiCallType type)
+        public static async Task<ObservableCollection<WeatherData>> DownlaodForecastData(string city)
         {
             var weatherDataForecastAsJson = new object();
-            switch(type)
-            {
-                case ApiCallType.Forecast:
-                    weatherDataForecastAsJson = await GetWeatherInfoJsonFromWeb("forecast?q=" + city);
-                    JObject jsonObjectForWeatherList = JObject.Parse(weatherDataForecastAsJson as String);
-                    ObservableCollection<WeatherData> forecastList = JsonConvert.DeserializeObject<ObservableCollection<WeatherData>>(jsonObjectForWeatherList["list"].ToString());
-                    break;
-                case ApiCallType.ForeCastDaily:
-                    weatherDataForecastAsJson = await GetWeatherInfoJsonFromWeb("forecast/daily?q=" + city);
-                    break;
-            }
-                
-            return new ObservableCollection<Day>();
+
+            weatherDataForecastAsJson = await GetWeatherInfoJsonFromWeb("forecast?q=" + city);
+
+            JObject jsonObjectForWeatherList = JObject.Parse(weatherDataForecastAsJson as String);
+            ObservableCollection<WeatherData> forecastList = JsonConvert.DeserializeObject<ObservableCollection<WeatherData>>(jsonObjectForWeatherList["list"].ToString());
+
+            return forecastList;
         }
+
+        public static async Task<ObservableCollection<WeatherDataDailyForecast>> DownlaodDailyForecastData(string city)
+        {
+            var weatherDataForecastAsJson = new object();
+
+            weatherDataForecastAsJson = await GetWeatherInfoJsonFromWeb("forecast/daily?q=" + city + "&cnt=5");
+
+            JObject jsonObjectForDailyWeatherList = JObject.Parse(weatherDataForecastAsJson as String);
+            ObservableCollection<WeatherDataDailyForecast> dailyForecastList = JsonConvert.DeserializeObject<ObservableCollection<WeatherDataDailyForecast>>(jsonObjectForDailyWeatherList["list"].ToString());
+
+            return dailyForecastList;
+        }
+
 
         private static async Task<object> GetWeatherInfoJsonFromWeb(string parameter)
         {

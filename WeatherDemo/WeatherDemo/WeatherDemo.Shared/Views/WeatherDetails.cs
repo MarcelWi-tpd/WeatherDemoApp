@@ -4,14 +4,22 @@ using System.Text;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using WeatherDemo.Common;
+using WeatherDemo.Models;
+using WeatherDemo.Services;
+using WeatherDemo.ViewModels;
 
 namespace WeatherDemo.Views
 {
     public sealed partial class WeatherDetails : Page
     {
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             this.navigationHelper.OnNavigatedTo(e);
+
+            MainViewModel.Current.ThreeHourIntervalForecast = await Api.DownlaodForecastData(MainViewModel.Current.CurrentLocation.Name);
+            MainViewModel.Current.DailyIntervalForecast =
+                await Api.DownlaodDailyForecastData(MainViewModel.Current.CurrentLocation.Name);
+
         }
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {

@@ -37,6 +37,20 @@ namespace WeatherDemo.ViewModels
             set { SetProperty(ref _LocationCollection, value); }
         }
 
+        private ObservableCollection<WeatherData> _ThreeHourIntervalForecast;
+        public ObservableCollection<WeatherData> ThreeHourIntervalForecast
+        {
+            get { return _ThreeHourIntervalForecast ?? (_ThreeHourIntervalForecast = new ObservableCollection<WeatherData>()); }
+            set { SetProperty(ref _ThreeHourIntervalForecast, value); }
+        }
+
+        private ObservableCollection<WeatherDataDailyForecast> _DailyIntervalForecast;
+        public ObservableCollection<WeatherDataDailyForecast> DailyIntervalForecast
+        {
+            get { return _DailyIntervalForecast ?? (_DailyIntervalForecast = new ObservableCollection<WeatherDataDailyForecast>()); }
+            set { SetProperty(ref _DailyIntervalForecast, value); }
+        }
+
         public MainViewModel()
         {
             _Current = this;
