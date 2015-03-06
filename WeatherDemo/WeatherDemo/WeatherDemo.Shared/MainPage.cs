@@ -12,6 +12,7 @@ using WeatherDemo.Models;
 using WeatherDemo.Views;
 using WeatherDemo.Services;
 using WeatherDemo.ViewModels;
+using System.Threading.Tasks;
 
 namespace WeatherDemo
 {
@@ -53,6 +54,7 @@ namespace WeatherDemo
         //TODO: zurück in MainViewModel, aber es kam eine Exception - aus Zeitgründen vorerst hierher verschoben
         private async void LoadLocalLocation()
         {
+            await ShowLoading(true);
             var localLocationAsXml = await LocalStorage.GetJsonFromLocalStorage("userLocation.xml");
             if (localLocationAsXml == null || String.IsNullOrEmpty(localLocationAsXml))
                 return;
@@ -77,6 +79,7 @@ namespace WeatherDemo
 
                 MainViewModel.Current.LocationCollection.Add(location);
             }
+            await ShowLoading(false);
         }
 
         private void AddLocation_Click(object sender, RoutedEventArgs e)
@@ -107,6 +110,18 @@ namespace WeatherDemo
 
             MainViewModel.Current.CurrentLocation = (e.ClickedItem as Location);
             Frame.Navigate(typeof(WeatherDetails));
+        }
+
+        private async Task ShowLoading(bool p)
+        {
+#if WINDOWS_PHONE_APP
+            if (p)
+                await App.ShowLoadingIndicatorAsync();
+            else
+            {
+                await App.HideLoadingIndicatorAsync();
+            }
+#endif
         }
     }
 }

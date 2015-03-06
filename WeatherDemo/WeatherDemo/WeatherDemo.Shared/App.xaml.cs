@@ -22,6 +22,7 @@ using WeatherDemo.Models;
 using WeatherDemo.Services;
 using WeatherDemo.ViewModels;
 using System.Threading.Tasks;
+using Windows.UI.ViewManagement;
 
 // The Blank Application template is documented at http://go.microsoft.com/fwlink/?LinkId=234227
 
@@ -169,5 +170,21 @@ namespace WeatherDemo
 
             await LocalStorage.SaveJsonToLocalStorage("userLocation.xml", xmlLocations.ToString());
         }
+
+#if WINDOWS_PHONE_APP
+        internal async static Task ShowLoadingIndicatorAsync()
+        {
+            var statusBar = StatusBar.GetForCurrentView();
+            statusBar.ProgressIndicator.Text = "Wird geladen...";
+            await statusBar.ProgressIndicator.ShowAsync();
+        }
+
+        internal async static Task HideLoadingIndicatorAsync()
+        {
+            var statusBar = StatusBar.GetForCurrentView();
+            statusBar.ProgressIndicator.Text = "";
+            await statusBar.ProgressIndicator.HideAsync();
+        }
+#endif
     }
 }

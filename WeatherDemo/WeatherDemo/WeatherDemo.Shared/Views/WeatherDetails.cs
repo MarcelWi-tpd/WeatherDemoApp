@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using WeatherDemo.Common;
 using WeatherDemo.Models;
 using WeatherDemo.Services;
 using WeatherDemo.ViewModels;
+using System.Threading.Tasks;
 
 namespace WeatherDemo.Views
 {
@@ -16,14 +18,23 @@ namespace WeatherDemo.Views
         {
             this.navigationHelper.OnNavigatedTo(e);
 
+            StatusBar statusBar = StatusBar.GetForCurrentView();
+            await statusBar.HideAsync();
+
+            await ShowLoading(true);
             MainViewModel.Current.ThreeHourIntervalForecast = await Api.DownlaodForecastData(MainViewModel.Current.CurrentLocation.Name);
             MainViewModel.Current.DailyIntervalForecast =
                 await Api.DownlaodDailyForecastData(MainViewModel.Current.CurrentLocation.Name);
+            await ShowLoading(false);
 
         }
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        protected override async void OnNavigatedFrom(NavigationEventArgs e)
         {
             this.navigationHelper.OnNavigatedFrom(e);
+
+
+            StatusBar statusBar = StatusBar.GetForCurrentView();
+            await statusBar.ShowAsync();
         }
 
         /// <summary>
@@ -59,6 +70,18 @@ namespace WeatherDemo.Views
         /// serializable state.</param>
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
+        }
+
+        private async Task ShowLoading(bool p)
+        {
+#if WINDOWS_PHONE_APP
+            if (p)
+                await App.ShowLoadingIndicatorAsync();
+            else
+            {
+                await App.HideLoadingIndicatorAsync();
+            }
+#endif
         }
     }
 }

@@ -21,20 +21,20 @@
         <Binding Path="Current" Source="{StaticResource MainViewModel}"/>
     </Page.DataContext>
     
-	<Grid x:Name="RootGrid" Opacity="0.5">
+	<Grid x:Name="RootGrid" Opacity="0.4">
 		<Grid.RowDefinitions>
-			<RowDefinition Height="80*"/>
-			<RowDefinition Height="239*"/>
+			<RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
 		</Grid.RowDefinitions>
 		<Grid.Background>
 			<ImageBrush Stretch="UniformToFill" ImageSource="ms-appx:///Assets/Background/803.jpg"/>
 		</Grid.Background>
 		<Grid x:Name="HeaderGrid">
 			<Grid.RowDefinitions>
-				<RowDefinition Height="45*"/>
-				<RowDefinition Height="117*"/>
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="*"/>
 			</Grid.RowDefinitions>
-			<TextBlock x:Name="tblCityCountry" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="32" Margin="0,6,0,0" FontFamily="Segoe WP Light">
+			<TextBlock x:Name="tblCityCountry" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="32" Margin="0,6,0,0" FontFamily="Segoe WP Light" FontWeight="Bold">
 				<Run Text="{Binding CurrentLocation.Name}" />
 				<Run Text=", " />
 				<Run Text="{Binding CurrentLocation.Country}" />
@@ -53,7 +53,7 @@
 						<RowDefinition Height="8*"/>
 						<RowDefinition Height="3*"/>
 					</Grid.RowDefinitions>
-					<TextBlock x:Name="tblTempMax" TextWrapping="Wrap" Foreground="White" VerticalAlignment="Center" Margin="0,0,0,3" FontSize="24" Height="21" FontFamily="Segoe WP Light">
+					<TextBlock x:Name="tblTempMax" TextWrapping="Wrap" Foreground="White" VerticalAlignment="Center" Margin="0,0,0,3" FontSize="24" Height="21" FontFamily="Segoe WP Light" FontWeight="Bold">
 						<Run Text="{Binding CurrentLocation.TodaysWeatherData.Main.MaxTemperature}" />
 						<Run Text="°" />
 					</TextBlock>
@@ -65,44 +65,44 @@
 				</Grid>
 			</Grid>
 		</Grid>
-		<Grid x:Name="AdditionalDataGrid" Grid.Row="1">
+		<Grid x:Name="AdditionalDataGrid" Grid.Row="1" HorizontalAlignment="Center">
 			<Grid.RowDefinitions>
-				<RowDefinition Height="48*"/>
-				<RowDefinition Height="48*"/>
-				<RowDefinition Height="48*"/>
-				<RowDefinition Height="49*"/>
+				<RowDefinition Height="50*"/>
+				<RowDefinition Height="50*"/>
+				<RowDefinition Height="50*"/>
+				<RowDefinition Height="50*"/>
 				<RowDefinition Height="50*"/>
 				<RowDefinition Height="235*"/>
 			</Grid.RowDefinitions>
 			<Grid.ColumnDefinitions>
-				<ColumnDefinition Width="125.833"/>
-				<ColumnDefinition Width="145"/>
-				<ColumnDefinition Width="129.167"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="Auto"/>
 			</Grid.ColumnDefinitions>
-			<TextBlock x:Name="tblHumidity" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Humidity" VerticalAlignment="Center" FontFamily="Segoe WP Light" FontSize="21.333" Margin="12,0,0,0" Grid.Column="1"/>
-			<TextBlock x:Name="tblPressure" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Pressure" VerticalAlignment="Center" FontFamily="Segoe WP Light" FontSize="21.333" Margin="12,0,0,0" Grid.Row="1" Grid.Column="1"/>
-			<TextBlock x:Name="tblWind" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Wind" VerticalAlignment="Center" FontFamily="Segoe WP Light" FontSize="21.333" Margin="12,0,0,0" Grid.Row="2" Grid.Column="1"/>
-			<TextBlock x:Name="tblSunrise" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Sunrise" VerticalAlignment="Center" FontFamily="Segoe WP Light" FontSize="21.333" Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="1" Margin="12,0,0,0"/>
-			<TextBlock x:Name="tblSunset" TextWrapping="Wrap" Text="Sunset" FontFamily="Segoe WP Light" FontSize="21.333" Margin="12,0,0,0" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1"/>
-			<TextBlock x:Name="tblHumidityData" HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Segoe WP Light" FontSize="21.333" Grid.Row="0" Grid.Column="2" Margin="0,0,12,0">
+			<TextBlock x:Name="tblHumidity" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Humidity" VerticalAlignment="Center" FontFamily="Segoe WP Light" FontSize="21.333" Margin="12,0,0,0" Grid.Column="1" FontWeight="Bold"/>
+			<TextBlock x:Name="tblPressure" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Pressure" VerticalAlignment="Center" FontFamily="Segoe WP Light" FontSize="21.333" Margin="12,0,0,0" Grid.Row="1" Grid.Column="1" FontWeight="Bold"/>
+			<TextBlock x:Name="tblWind" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Wind" VerticalAlignment="Center" FontFamily="Segoe WP Light" FontSize="21.333" Margin="12,0,0,0" Grid.Row="2" Grid.Column="1" FontWeight="Bold"/>
+			<TextBlock x:Name="tblSunrise" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Sunrise" VerticalAlignment="Center" FontFamily="Segoe WP Light" FontSize="21.333" Grid.Row="3" Grid.ColumnSpan="2" Grid.Column="1" Margin="12,0,0,0" FontWeight="Bold"/>
+			<TextBlock x:Name="tblSunset" TextWrapping="Wrap" Text="Sunset" FontFamily="Segoe WP Light" FontSize="21.333" Margin="12,0,0,0" Grid.Row="4" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" FontWeight="Bold"/>
+			<TextBlock x:Name="tblHumidityData" HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Segoe WP Light" FontSize="21.333" Grid.Row="0" Grid.Column="2" Margin="0,0,12,0" FontWeight="Bold">
 				<Run Text="{Binding Current.CurrentLocation.TodaysWeatherData.Main.Humidity}" />
 				<Run Text="%" />
 			</TextBlock>
-			<TextBlock x:Name="tblPressureData" HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding Current.CurrentLocation.TodaysWeatherData.Main.Pressure}" VerticalAlignment="Center" FontFamily="Segoe WP Light" FontSize="21.333" Grid.Column="2" Grid.Row="1" Margin="0,0,12,0"/>
+			<TextBlock x:Name="tblPressureData" HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding Current.CurrentLocation.TodaysWeatherData.Main.Pressure}" VerticalAlignment="Center" FontFamily="Segoe WP Light" FontSize="21.333" Grid.Column="2" Grid.Row="1" Margin="0,0,12,0" FontWeight="Bold"/>
 			<Grid x:Name="WindGrid" Grid.Row="2" Grid.Column="2">
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="13*"/>
 					<ColumnDefinition Width="31*"/>
 					<ColumnDefinition Width="21*"/>
 				</Grid.ColumnDefinitions>
-				<TextBlock x:Name="tblWindData" TextWrapping="Wrap" FontSize="21.333" VerticalAlignment="Center" Margin="0" FontFamily="Segoe WP Light" HorizontalAlignment="Right" Grid.Column="1">
+				<TextBlock x:Name="tblWindData" TextWrapping="Wrap" FontSize="21.333" VerticalAlignment="Center" Margin="0" FontFamily="Segoe WP Light" HorizontalAlignment="Right" Grid.Column="1" FontWeight="Bold">
 					<Run Text="{Binding Current.CurrentLocation.TodaysWeatherData.Wind.Speed, Converter={StaticResource MeterPerSecondToKilometerPerHourConverter}}" />
 					<Run Text="km/h" />
 				</TextBlock>
-				<TextBlock x:Name="tblWindDegData" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Current.CurrentLocation.TodaysWeatherData.Wind.Degree, Converter={StaticResource WindDegreeConverter}}" VerticalAlignment="Center" Margin="0" Grid.Column="2" FontFamily="Segoe WP Light" FontSize="21.333"/>
+				<TextBlock x:Name="tblWindDegData" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Current.CurrentLocation.TodaysWeatherData.Wind.Degree, Converter={StaticResource WindDegreeConverter}}" VerticalAlignment="Center" Margin="0" Grid.Column="2" FontFamily="Segoe WP Light" FontSize="21.333" FontWeight="Bold"/>
 			</Grid>
-			<TextBlock x:Name="tblSunriseData" HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding Current.CurrentLocation.TodaysWeatherData.Sys.Sunrise, Converter={StaticResource DateTimeToTimeStringConverter}}" VerticalAlignment="Center" FontFamily="Segoe WP Light" FontSize="21.333" Margin="0,0,12,0" Grid.Row="3" Grid.Column="2"/>
-			<TextBlock x:Name="tblSunsetData" HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding CurrentLocation.TodaysWeatherData.Sys.Sunset, Converter={StaticResource DateTimeToTimeStringConverter}}" VerticalAlignment="Center" FontFamily="Segoe WP Light" FontSize="21.333" Grid.Row="4" Grid.Column="2" Margin="0,0,12,0"/>
+			<TextBlock x:Name="tblSunriseData" HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding Current.CurrentLocation.TodaysWeatherData.Sys.Sunrise, Converter={StaticResource DateTimeToTimeStringConverter}}" VerticalAlignment="Center" FontFamily="Segoe WP Light" FontSize="21.333" Margin="0,0,12,0" Grid.Row="3" Grid.Column="2" FontWeight="Bold"/>
+			<TextBlock x:Name="tblSunsetData" HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding CurrentLocation.TodaysWeatherData.Sys.Sunset, Converter={StaticResource DateTimeToTimeStringConverter}}" VerticalAlignment="Center" FontFamily="Segoe WP Light" FontSize="21.333" Grid.Row="4" Grid.Column="2" Margin="0,0,12,0" FontWeight="Bold"/>
 		</Grid>
 	</Grid>
 </Page>
