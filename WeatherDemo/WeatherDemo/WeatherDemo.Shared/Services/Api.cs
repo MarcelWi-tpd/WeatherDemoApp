@@ -27,14 +27,26 @@ namespace WeatherDemo.Services
 
             // TODO: if succeed: 200 else 404 in "cod"
 
+            try
+            {
+                // convert data relevant for current location
+                var location = JsonConvert.DeserializeObject<Location>(weatherDataAsJson as String);
 
-            // convert data relevant for current location
-            var location = JsonConvert.DeserializeObject<Location>(weatherDataAsJson as String);
+                // convert data relevant for current weather
+                location.TodaysWeatherData = JsonConvert.DeserializeObject<WeatherData>(weatherDataAsJson as String);
 
-            // convert data relevant for current weather
-            location.TodaysWeatherData = JsonConvert.DeserializeObject<WeatherData>(weatherDataAsJson as String);
+                return location;
+            }
+            catch (JsonReaderException exception)
+            {
+                Debug.WriteLine(exception.ToString());
+            }
+            catch (JsonSerializationException e)
+            {
+                Debug.WriteLine(e.ToString());
+            }
 
-            return location;
+             return null;
         }
 
         public static async Task<ObservableCollection<WeatherData>> DownlaodForecastData(string city)

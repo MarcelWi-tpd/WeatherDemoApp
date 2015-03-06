@@ -18,6 +18,7 @@ namespace WeatherDemo.Models
         public Main Main { get; set; }
         public Sys Sys { get; set; }
 
+
         private DateTime _Time;
         [JsonProperty(PropertyName = "dt_txt")]
         public DateTime Time
@@ -29,8 +30,32 @@ namespace WeatherDemo.Models
             }
         }
 
+        private List<Weather> _Weather;
+        public List<Weather> Weather
+        {
+            get { return _Weather; }
+            set
+            {
+                SetProperty(ref _Weather, value);
+            }
+        }
+
         //TODO: Fehlermeldung kommt hier: public Weather Weather { get; set; }
         #endregion
+
+        public WeatherData() { }
+
+        [JsonConstructor]
+        public WeatherData(DateTime time, Wind wind, Rain rain, Snow snow, Clouds clouds, Main main, Sys sys)
+        {
+            Time = time;
+            Wind = wind;
+            Rain = rain;
+            Snow = snow;
+            Clouds = clouds;
+            Main = main;
+            Sys = sys;
+        }
     }
     public class Main : BindableBase
     {
@@ -147,49 +172,6 @@ namespace WeatherDemo.Models
         }
     }
 
-    public class Weather : BindableBase
-    {
-        #region properties
-        private int _WeatherID;
-        [JsonProperty(PropertyName = "id")]
-        public int WeatherID
-        {
-            get { return _WeatherID; }
-            set
-            {
-                SetProperty(ref _WeatherID, value);
-            }
-        }
-
-        private string _Name;
-        [JsonProperty(PropertyName = "main")]
-        public string Name
-        {
-            get { return _Name; }
-            set
-            {
-                SetProperty(ref _Name, value);
-            }
-        }
-        private string _Description;
-        [JsonProperty(PropertyName = "description")]
-        public string Description
-        {
-            get { return _Description; }
-            set
-            {
-                SetProperty(ref _Description, value);
-            }
-        }
-        #endregion
-
-        public Weather(int weatherId, string name, string description)
-        {
-            WeatherID = weatherId;
-            Name = name;
-            Description = description;
-        }
-    }
 
     public class Wind : BindableBase
     {

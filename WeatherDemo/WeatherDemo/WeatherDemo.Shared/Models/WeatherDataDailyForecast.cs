@@ -10,9 +10,17 @@ namespace WeatherDemo.Models
     public class WeatherDataDailyForecast : BindableBase
     {
         public Temp Temp { get; set; }
-        //public Weather weather { get; set; }
 
         #region properties
+        private List<Weather> _Weather;
+        public List<Weather> Weather
+        {
+            get { return _Weather; }
+            set
+            {
+                SetProperty(ref _Weather, value);
+            }
+        }
 
         private double _Pressure;
 
@@ -80,17 +88,6 @@ namespace WeatherDemo.Models
         }
 
         #endregion
-
-        /*public WeatherDataDailyForecast(double pressure, int humidity, int time, double windSpeed, double windDegree, double clouds, double rain)
-        {
-            Pressure = pressure;
-            Humidity = humidity;
-            Time = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds(time).ToLocalTime();
-            WindSpeed = windSpeed;
-            WindDegree = windDegree;
-            Clouds = clouds;
-            Rain = rain;
-        }*/
     }
 
     public class Temp : BindableBase
@@ -173,60 +170,4 @@ namespace WeatherDemo.Models
             MorningTemperature = mornTemp;
         }
     }
-    /*public class Weather : BindableBase
-    {
-        #region properties
-        private int _Id;
-        [JsonProperty(PropertyName = "id")]
-        public int Id
-        {
-            get { return _Id; }
-            set
-            {
-                SetProperty(ref _Id, value);
-            }
-        }
-
-        private string _Main;
-        [JsonProperty(PropertyName = "main")]
-        public string Main
-        {
-            get { return _Main; }
-            set
-            {
-                SetProperty(ref _Main, value);
-            }
-        }
-
-        private string _Description;
-        [JsonProperty(PropertyName = "description")]
-        public string Description
-        {
-            get { return _Description; }
-            set
-            {
-                SetProperty(ref _Description, value);
-            }
-        }
-
-        private string _Icon;
-        [JsonProperty(PropertyName = "icon")]
-        public string Icon
-        {
-            get { return _Icon; }
-            set
-            {
-                SetProperty(ref _Icon, value);
-            }
-        }
-        #endregion
-
-        public Weather(int id, string main, string description, string icon)
-        {
-            Id = id;
-            Main = main;
-            Description = description;
-            Icon = icon;
-        }
-    }*/
 }

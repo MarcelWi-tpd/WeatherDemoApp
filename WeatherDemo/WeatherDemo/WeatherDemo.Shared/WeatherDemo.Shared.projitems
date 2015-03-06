@@ -29,6 +29,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Models\Coordinates.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Day.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Location.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\Weather.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\WeatherData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\WeatherDataDailyForecast.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Services\Api.cs" />
