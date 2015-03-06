@@ -22,6 +22,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Converters\BooleanToVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\DateTimeToStringConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Converters\IntToVisibilityConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\MeterPerSecondToKilometerPerHourConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Converters\WindDegreeConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)MainPage.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\ApiCallType.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\Coordinates.cs" />
