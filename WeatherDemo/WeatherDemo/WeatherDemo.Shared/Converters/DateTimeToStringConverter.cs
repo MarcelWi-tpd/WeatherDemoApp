@@ -12,7 +12,9 @@ namespace WeatherDemo.Converters
             if (value is DateTime)
             {
                 DateTime date = (DateTime)value;
-                return date.ToString("MMMM yyyy");
+                string dateString =
+                date.DayOfWeek + " " + date.ToString("HH:mm");
+                return dateString;
             }
 
             return null;

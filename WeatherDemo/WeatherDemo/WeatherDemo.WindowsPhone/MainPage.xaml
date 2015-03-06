@@ -5,14 +5,14 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 	xmlns:ViewModels="clr-namespace:DealzCollectorWP.ViewModels" 
-    xmlns:Converters="using:WeatherDemo.Converters"
+    xmlns:converters="using:WeatherDemo.Converters"
     x:Class="WeatherDemo.MainPage"
     mc:Ignorable="d" Background="White" Foreground="Black" Loaded="Page_Loaded">
 
     
 	<Page.Resources>
-		<Converters:IntToNegatedVisibilityConverter x:Key="IntToNegatedVisibilityConverter"/>
-		<Converters:IntToVisibilityConverter x:Key="IntToVisibilityConverter"/>
+        <converters:IntToNegatedVisibilityConverter x:Key="IntToNegatedVisibilityConverter"/>
+        <converters:IntToVisibilityConverter x:Key="IntToVisibilityConverter"/>
 
         <MenuFlyout x:Key="deleteLocation">
             <MenuFlyoutItem x:Name="DeleteLocationFlayFlyoutItem" Text="Löschen" Click="DeleteLocationFlayFlyoutItem_Click"></MenuFlyoutItem>
@@ -30,7 +30,7 @@
                 		<Run Text=", " />
                 		<Run Text="{Binding Country}"/>
                 	</TextBlock>
-                	<Grid Height="100" Width="100">
+                	<Grid HorizontalAlignment="Center">
                 		<Grid.ColumnDefinitions>
                 			<ColumnDefinition/>
                 			<ColumnDefinition/>

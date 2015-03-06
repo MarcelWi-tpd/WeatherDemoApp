@@ -12,7 +12,7 @@ namespace WeatherDemo.Converters
         {
             if (value is double)
             {
-                return ((double) value * 3.6);
+                return Math.Round(((double) value * 3.6), 0);
             }
             return value;
         }

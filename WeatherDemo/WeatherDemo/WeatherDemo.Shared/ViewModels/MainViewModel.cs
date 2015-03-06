@@ -69,6 +69,8 @@ namespace WeatherDemo.ViewModels
 
                 CurrentLocation = loc;
                 CurrentLocation.TodaysWeatherData = data;
+
+                ThreeHourIntervalForecast.Add(data);
             }
         }
     }
