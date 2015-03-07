@@ -25,8 +25,8 @@
             		<ImageBrush ImageSource="Assets/TileBackground/500.jpg" Stretch="Fill"/>
             	</Border.Background>
                 <Grid Width="106" Height="106" Background="Black" Opacity="0.75" >
-                	<Image x:Name="icon" Height="40" Width="40" Source="{Binding TodaysWeatherData.Weather[0].WeatherID, Converter={StaticResource WeatherIdToIconSourceConverter}}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,12,0,0"/>
-                	<TextBlock x:Name="tblPlace" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Bottom" TextAlignment="Left" Foreground="White" Margin="0,0,0,6" TextTrimming="None" Style="{StaticResource BaseTextBlockStyle}" LineHeight="12" FontSize="12" FontFamily="Segoe WP Light" FontWeight="SemiLight">
+                	<Image x:Name="icon" Height="40" Width="40" Source="{Binding TodaysWeatherData.Weather[0].WeatherID, Converter={StaticResource WeatherIdToIconSourceConverter}}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,6"/>
+                	<TextBlock x:Name="tblPlace" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Bottom" TextAlignment="Left" Foreground="White" Margin="3,0,3,6" TextTrimming="None" Style="{StaticResource BaseTextBlockStyle}" LineHeight="12" FontSize="12" FontFamily="Segoe WP Light" FontWeight="SemiLight">
                 		<Run Text="{Binding Name}"/>
                 		<Run Text=", " />
                 		<Run Text="{Binding Country}"/>

@@ -13,37 +13,37 @@ namespace WeatherDemo.Converters
             {
                 double degree = (double)value;
                 if (degree >= 348.75 && degree < 11.25)
-                    return "N";
+                    return " N";
                 if (degree >= 11.25 && degree < 33.75)
-                    return "NNE";
+                    return " NNE";
                 if (degree >= 33.75 && degree < 56.25)
-                    return "NE";
+                    return " NE";
                 if (degree >= 56.25 && degree < 78.75)
-                    return "ENE";
+                    return " ENE";
                 if (degree >= 78.75 && degree < 101.25)
-                    return "E";
+                    return " E";
                 if (degree >= 101.25 && degree < 123.75)
-                    return "ESE";
+                    return " ESE";
                 if (degree >= 123.75 && degree < 146.25)
-                    return "SE";
+                    return " SE";
                 if (degree >= 146.25 && degree < 168.75)
-                    return "SSE";
+                    return " SSE";
                 if (degree >= 168.75 && degree < 191.25)
-                    return "S";
+                    return " S";
                 if (degree >= 191.25 && degree < 213.75)
-                    return "SSW";
+                    return " SSW";
                 if (degree >= 213.75 && degree < 236.25)
-                    return "SW";
+                    return " SW";
                 if (degree >= 236.25 && degree < 258.75)
-                    return "WSW";
+                    return " WSW";
                 if (degree >= 258.75 && degree < 281.25)
-                    return "W";
+                    return " W";
                 if (degree >= 281.25 && degree < 303.75)
-                    return "WNW";
+                    return " WNW";
                 if (degree >= 303.75 && degree < 326.25)
-                    return "NW";
+                    return " NW";
                 if (degree >= 326.25 && degree < 348.75)
-                    return "NNW";
+                    return " NNW";
 
                 return value;
             }
