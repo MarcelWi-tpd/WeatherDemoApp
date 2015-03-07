@@ -40,16 +40,16 @@ namespace WeatherDemo.Models
             set { SetProperty(ref _Humidity, value); }
         }
 
-        /*private DateTime _Time;
+        private int _Time;
         [JsonProperty(PropertyName = "dt")]
-        public DateTime Time
+        public int Time
         {
             get { return _Time; }
             set
             {
                 SetProperty(ref _Time, value);
             }
-        }*/
+        }
 
         private double _WindSpeed;
 

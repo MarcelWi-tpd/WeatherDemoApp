@@ -5,7 +5,9 @@
     xmlns:local="using:WeatherDemo.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" Foreground="Black" Background="White">
+    mc:Ignorable="d"
+    RequestedTheme="Dark"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
 
     <Page.BottomAppBar>
@@ -16,28 +18,28 @@
         </CommandBar>
     </Page.BottomAppBar>
 
-    <Grid x:Name="RootGrid">
+    <Grid x:Name="RootGrid" Style="{StaticResource BackgroundImageGridWP}">
         <Grid.RowDefinitions>
             <RowDefinition Height="60*"/>
             <RowDefinition Height="578*"/>
         </Grid.RowDefinitions>
         <Grid x:Name="HeaderGrid" Margin="12,0" VerticalAlignment="Top" Height="60">
-            <TextBlock x:Name="AppTitle" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,12,0" Text="WETTERINFORMATIONEN" FontSize="16" FontWeight="Bold"/>
+            <TextBlock x:Name="AppTitle" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,12,0" Text="WETTERINFORMATIONEN" FontSize="16" FontWeight="Bold" FontFamily="Segoe WP Light"/>
         </Grid>
 
 
 
-        <Grid x:Name="LocationGrid" Grid.Row="1" Margin="12,0,0,0">
+        <Grid x:Name="LocationGrid" Grid.Row="1" Margin="12,0,12,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="50*"/>
                 <RowDefinition Height="529*"/>
             </Grid.RowDefinitions>
-            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Einen Ort hinzufügen" VerticalAlignment="Top" Margin="0" FontSize="32"/>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Einen Ort hinzufügen" VerticalAlignment="Top" Margin="0" FontSize="32" FontFamily="Segoe WP Light"/>
             <StackPanel Grid.Row="1">
-                <TextBlock Text="Bitte in eines der untenstehenden Felder entweder die Postleitzahl oder den Namen des Ortes eingeben." Margin="0,12" TextWrapping="Wrap" FontSize="18" />
-                <TextBlock Text="Postleitzahl" FontSize="20" FontWeight="Bold" />
+                <TextBlock Text="Bitte in eines der untenstehenden Felder entweder die Postleitzahl oder den Namen des Ortes eingeben." Margin="0,12" TextWrapping="Wrap" FontSize="18" FontFamily="Segoe WP Light" />
+                <TextBlock Text="Postleitzahl" FontSize="20" FontWeight="Bold" FontFamily="Segoe WP Light" />
                 <TextBox x:Name="tbxPlz" InputScope="Number" VerticalAlignment="Center" />
-                <TextBlock Text="Names des Ortes" FontSize="20" FontWeight="Bold" />
+                <TextBlock Text="Names des Ortes" FontSize="20" FontWeight="Bold" FontFamily="Segoe WP Light" />
                 <TextBox x:Name="tbxPlace" VerticalAlignment="Center"  />
             </StackPanel>
         </Grid>

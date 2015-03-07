@@ -16,6 +16,12 @@ namespace WeatherDemo.Converters
                 date.DayOfWeek + " " + date.ToString("HH:mm");
                 return dateString;
             }
+            else if (value is int)
+            {
+                DateTime date = new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc).AddSeconds((int)value).ToLocalTime();
+                string dateString = date.DayOfWeek + ", " + date.ToString("dd.MM.yyyy");
+                return dateString;
+            }
 
             return null;
         }

@@ -67,10 +67,24 @@ namespace WeatherDemo.ViewModels
                 data.Sys = sys;
                 loc.TodaysWeatherData = data;
 
+                LocationCollection.Add(loc);
+
                 CurrentLocation = loc;
                 CurrentLocation.TodaysWeatherData = data;
 
                 ThreeHourIntervalForecast.Add(data);
+
+                WeatherDataDailyForecast dailyForecast = new WeatherDataDailyForecast();
+                Weather weather = new Weather("500", "Rain", "light rain");
+                dailyForecast.Temp = new Temp(276.52, 275.61, 276.52, 275.61, 276.52, 276.52);
+                dailyForecast.Humidity = 0;
+                dailyForecast.Pressure = 1016.77;
+                dailyForecast.Weather = new List<Weather>();
+                dailyForecast.Weather.Add(weather);
+                dailyForecast.WindDegree = 295;
+                dailyForecast.WindSpeed = 7.79;
+                dailyForecast.Time = 1425466800;
+
             }
         }
     }

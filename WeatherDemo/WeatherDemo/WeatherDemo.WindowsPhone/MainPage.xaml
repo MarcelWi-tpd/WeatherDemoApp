@@ -1,14 +1,13 @@
 ﻿<Page
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:WeatherDemo"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-	xmlns:ViewModels="clr-namespace:DealzCollectorWP.ViewModels" 
     xmlns:converters="using:WeatherDemo.Converters"
     x:Class="WeatherDemo.MainPage"
-    mc:Ignorable="d" Background="White" Foreground="Black" Loaded="Page_Loaded">
-
+    mc:Ignorable="d" Loaded="Page_Loaded"
+    RequestedTheme="Dark"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     
 	<Page.Resources>
 		<converters:WeatherIdToIconSourceConverter x:Key="WeatherIdToIconSourceConverter"/>
@@ -18,48 +17,49 @@
         <MenuFlyout x:Key="deleteLocation">
             <MenuFlyoutItem x:Name="DeleteLocationFlayFlyoutItem" Text="Löschen" Click="DeleteLocationFlayFlyoutItem_Click"/>
         </MenuFlyout>
-        
+
         <DataTemplate x:Key="LocationItemTemplate">
-            <Border BorderThickness="1" Margin="0,0,10,10" Opacity="0.85" Holding="Border_Holding"  FlyoutBase.AttachedFlyout="{StaticResource deleteLocation}">
-            	<Border.Background>
-            		<ImageBrush ImageSource="Assets/TileBackground/500.jpg" Stretch="Fill"/>
-            	</Border.Background>
-                <Grid Width="106" Height="106" Background="Black" Opacity="0.75" >
-                	<Image x:Name="icon" Height="40" Width="40" Source="{Binding TodaysWeatherData.Weather[0].WeatherID, Converter={StaticResource WeatherIdToIconSourceConverter}}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,6"/>
-                	<TextBlock x:Name="tblPlace" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Bottom" TextAlignment="Left" Foreground="White" Margin="3,0,3,6" TextTrimming="None" Style="{StaticResource BaseTextBlockStyle}" LineHeight="12" FontSize="12" FontFamily="Segoe WP Light" FontWeight="SemiLight">
+            <Border BorderThickness="1" Margin="0,0,10,10" Holding="Border_Holding"  FlyoutBase.AttachedFlyout="{StaticResource deleteLocation}" Background="Black" Opacity="0.85">
+                <Grid Width="106" Height="106" >
+                    <Image x:Name="icon" Height="40" Width="40" Source="{Binding TodaysWeatherData.Weather[0].WeatherID, Converter={StaticResource WeatherIdToIconSourceConverter}}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,6"/>
+                    <TextBlock x:Name="tblPlace" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Bottom" TextAlignment="Left" Foreground="White" Margin="3,0,3,6" TextTrimming="None" Style="{StaticResource BaseTextBlockStyle}" LineHeight="12" FontSize="12" FontFamily="Segoe WP Light" FontWeight="SemiLight">
                 		<Run Text="{Binding Name}"/>
                 		<Run Text=", " />
                 		<Run Text="{Binding Country}"/>
-                	</TextBlock>
-                	<Grid HorizontalAlignment="Center" Margin="0,6,0,0">
-                		<Grid.ColumnDefinitions>
-                			<ColumnDefinition/>
-                			<ColumnDefinition/>
-                		</Grid.ColumnDefinitions>
-                		<TextBlock x:Name="tblTemp" HorizontalAlignment="Right" TextWrapping="Wrap" Margin="0,0,3,0" FontSize="18.667" Foreground="White" FontWeight="Bold" VerticalAlignment="Center" FontFamily="Segoe WP Light">
+                    </TextBlock>
+                    <Grid HorizontalAlignment="Center" Margin="0,6,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="tblTemp" HorizontalAlignment="Right" TextWrapping="Wrap" Margin="0,0,3,0" FontSize="18.667" Foreground="White" FontWeight="Bold" VerticalAlignment="Center" FontFamily="Segoe WP Light">
                 			<Run Text="{Binding TodaysWeatherData.Main.Temperature}" />
                 			<Run Text="°" />
-                		</TextBlock>
-                		<Grid HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Center">
-                			<Grid.RowDefinitions>
-                				<RowDefinition Height="8*"/>
-                				<RowDefinition Height="3*"/>
-                			</Grid.RowDefinitions>
-                			<TextBlock x:Name="tblTempMax" TextWrapping="Wrap" Foreground="White" VerticalAlignment="Center" Margin="0" FontSize="10.667" Height="21" FontFamily="Segoe WP Light">
+                        </TextBlock>
+                        <Grid HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="8*"/>
+                                <RowDefinition Height="3*"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock x:Name="tblTempMax" TextWrapping="Wrap" Foreground="White" VerticalAlignment="Center" Margin="0" FontSize="10.667" Height="21" FontFamily="Segoe WP Light">
                 				<Run Text="{Binding TodaysWeatherData.Main.MaxTemperature}" />
                 				<Run Text="°" />
-                			</TextBlock>
-                			<Border BorderBrush="White" BorderThickness="0,0,0,0.5" VerticalAlignment="Center" Grid.RowSpan="2" Margin="0,3,0,0"/>
-                			<TextBlock x:Name="tblTempMin" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Opacity="0.85" Margin="0" Foreground="White" FontSize="8" Grid.Row="1" FontFamily="Segoe WP Light">
+                            </TextBlock>
+                            <Border BorderBrush="White" BorderThickness="0,0,0,0.5" VerticalAlignment="Center" Grid.RowSpan="2" Margin="0,3,0,0"/>
+                            <TextBlock x:Name="tblTempMin" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Opacity="0.85" Margin="0" Foreground="White" FontSize="8" Grid.Row="1" FontFamily="Segoe WP Light">
                 				<Run Text="{Binding TodaysWeatherData.Main.MinTemperature}" />
                 				<Run Text="°" />
-                			</TextBlock>
-                		</Grid>
-                	</Grid>       
+                            </TextBlock>
+                        </Grid>
+                    </Grid>
                 </Grid>
             </Border>
         </DataTemplate>
     </Page.Resources>
+
+    <Page.DataContext>
+        <Binding Path="Current" Source="{StaticResource MainViewModel}"/>
+    </Page.DataContext>
     
     <Page.BottomAppBar>
         <CommandBar Foreground="Black" Background="White">
@@ -67,27 +67,24 @@
         </CommandBar>
     </Page.BottomAppBar>
 
-    <Page.DataContext>
-        <Binding Path="Current" Source="{StaticResource MainViewModel}"/>
-    </Page.DataContext>
-	<Grid x:Name="RootGrid">
-		<Grid.RowDefinitions>
+    <Grid x:Name="RootGrid" Style="{StaticResource BackgroundImageGridWP}">
+        <Grid.RowDefinitions>
 			<RowDefinition Height="60*"/>
 			<RowDefinition Height="578*"/>
 		</Grid.RowDefinitions>
 		<Grid x:Name="HeaderGrid" Margin="12,0" VerticalAlignment="Top" Height="60">
-			<TextBlock x:Name="AppTitle" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,12,0" Text="WETTERINFORMATIONEN" FontSize="16" FontWeight="Bold"/>
+			<TextBlock x:Name="AppTitle" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,12,0" Text="WETTERINFORMATIONEN" FontSize="16" FontWeight="Bold" FontFamily="Segoe WP Light"/>
 		</Grid>
-        
-        
-        
-		<Grid x:Name="LocationGrid" Grid.Row="1" Margin="12,0,0,0">
-			<Grid.RowDefinitions>
+
+
+
+        <Grid x:Name="LocationGrid" Grid.Row="1" Margin="12,0,0,0">
+            <Grid.RowDefinitions>
 				<RowDefinition Height="50*"/>
 				<RowDefinition Height="529*"/>
 			</Grid.RowDefinitions>
-			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Meine Orte" VerticalAlignment="Top" Margin="0" FontSize="32"/>
-			<TextBlock x:Name="NoLocationFoundMessage" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="1" FontSize="21.333" Visibility="{Binding Current.LocationCollection.Count, Converter={StaticResource IntToNegatedVisibilityConverter}, Mode=OneWay}" Text="Keine Orte gefunden. Es müssen erst Orte angelegt werden, um hier aktuelle Informationen zum Wetter anzeigen zu lassen."/>
+			<TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Meine Orte" VerticalAlignment="Top" Margin="0" FontSize="32" FontFamily="Segoe WP Light"/>
+			<TextBlock x:Name="NoLocationFoundMessage" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="1" FontSize="21.333" Visibility="{Binding Current.LocationCollection.Count, Converter={StaticResource IntToNegatedVisibilityConverter}, Mode=OneWay}" Text="Keine Orte gefunden. Es müssen erst Orte angelegt werden, um hier aktuelle Informationen zum Wetter anzeigen zu lassen." FontFamily="Segoe WP Light"/>
 			<ListView x:Name="LocationListView" 
 				Grid.Row="1" 
                 ItemsSource="{Binding LocationCollection}" 
