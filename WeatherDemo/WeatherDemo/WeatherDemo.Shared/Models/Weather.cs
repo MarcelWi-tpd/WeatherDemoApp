@@ -10,9 +10,9 @@ namespace WeatherDemo.Models
     public class Weather : BindableBase
     {
         #region properties
-        private int _WeatherID;
+        private string _WeatherID;
         [JsonProperty(PropertyName = "id")]
-        public int WeatherID
+        public string WeatherID
         {
             get { return _WeatherID; }
             set
@@ -43,7 +43,7 @@ namespace WeatherDemo.Models
         }
         #endregion
 
-        public Weather(int weatherId, string name, string description)
+        public Weather(string weatherId, string name, string description)
         {
             WeatherID = weatherId;
             Name = name;
