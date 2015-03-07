@@ -111,9 +111,23 @@ namespace WeatherDemo.Views
 
         private async void CurrentLocation_Click(object sender, RoutedEventArgs e)
         {
-            if (LocalStorage.GetSetting("LocationConsent") != null && (bool) LocalStorage.GetSetting("LocationConsent"))
+            Geolocator geolocator = new Geolocator();
+            if (geolocator.LocationStatus == PositionStatus.Disabled ||
+                    LocalStorage.GetSetting("LocationConsent") != null && (bool)LocalStorage.GetSetting("LocationConsent"))
             {
-                Geolocator geolocator = new Geolocator();
+
+                // check if device has gps modul
+                if (geolocator.LocationStatus == PositionStatus.NotAvailable)
+                {
+                    var messageDialog =
+                        new MessageDialog(
+                            "Der Standort kann nicht ermittelt werden. Dieses Gerät verfügt nicht über ein GPS Modul.",
+                            "Fehler bei der Ortung");
+                    messageDialog.Commands.Add(new UICommand("OK"));
+                    await messageDialog.ShowAsync();
+                    return;
+                }
+
                 geolocator.DesiredAccuracy = PositionAccuracy.High;
 
                 Geoposition devicePosition = await geolocator.GetGeopositionAsync(
