@@ -9,6 +9,7 @@ using WeatherDemo.Models;
 using WeatherDemo.Services;
 using WeatherDemo.ViewModels;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
 
 namespace WeatherDemo.Views
 {
@@ -24,9 +25,22 @@ namespace WeatherDemo.Views
 #endif
 
             await ShowLoading(true);
-            MainViewModel.Current.ThreeHourIntervalForecast = await Api.DownlaodForecastData(MainViewModel.Current.CurrentLocation.Name);
-            MainViewModel.Current.DailyIntervalForecast =
-                await Api.DownlaodDailyForecastData(MainViewModel.Current.CurrentLocation.Name);
+            if (App.IsInternetAvailable)
+            {
+                MainViewModel.Current.ThreeHourIntervalForecast =
+                    await Api.DownlaodForecastData(MainViewModel.Current.CurrentLocation.Name);
+                MainViewModel.Current.DailyIntervalForecast =
+                    await Api.DownlaodDailyForecastData(MainViewModel.Current.CurrentLocation.Name);
+            }
+            else
+            {
+                var messageDialog =
+                    new MessageDialog(
+                        "Aktuelle Wetterdaten konnten nicht abgerufen werden. Anscheinend besteht keine Verbindung zum Internet.",
+                        "Aktualisierung fehlgeschlagen");
+                messageDialog.Commands.Add(new UICommand("Ok"));
+                await messageDialog.ShowAsync();
+            }
             await ShowLoading(false);
 
         }

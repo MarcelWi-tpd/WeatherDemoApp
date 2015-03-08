@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
 using Newtonsoft.Json.Linq;
 using WeatherDemo.Models;
 using WeatherDemo.ViewModels;
@@ -40,13 +41,15 @@ namespace WeatherDemo.Services
             catch (JsonReaderException exception)
             {
                 Debug.WriteLine(exception.ToString());
+                ErrorMessageWhileReadingJson();
+                return null;
             }
             catch (JsonSerializationException e)
             {
                 Debug.WriteLine(e.ToString());
+                ErrorMessageWhileReadingJson();
+                return null;
             }
-
-             return null;
         }
 
         public static async Task<ObservableCollection<WeatherData>> DownlaodForecastData(string city)
@@ -55,10 +58,24 @@ namespace WeatherDemo.Services
 
             weatherDataForecastAsJson = await GetWeatherInfoJsonFromWeb("forecast?q=" + city);
 
-            JObject jsonObjectForWeatherList = JObject.Parse(weatherDataForecastAsJson as String);
-            ObservableCollection<WeatherData> forecastList = JsonConvert.DeserializeObject<ObservableCollection<WeatherData>>(jsonObjectForWeatherList["list"].ToString());
-
-            return forecastList;
+            try
+            {
+                JObject jsonObjectForWeatherList = JObject.Parse(weatherDataForecastAsJson as String);
+                ObservableCollection<WeatherData> forecastList = JsonConvert.DeserializeObject<ObservableCollection<WeatherData>>(jsonObjectForWeatherList["list"].ToString());
+                return forecastList;
+            }
+            catch (JsonReaderException exception)
+            {
+                Debug.WriteLine(exception.ToString());
+                ErrorMessageWhileReadingJson();
+                return null;
+            }
+            catch (JsonSerializationException e)
+            {
+                Debug.WriteLine(e.ToString());
+                ErrorMessageWhileReadingJson();
+                return null;
+            }
         }
 
         public static async Task<ObservableCollection<WeatherDataDailyForecast>> DownlaodDailyForecastData(string city)
@@ -67,10 +84,26 @@ namespace WeatherDemo.Services
 
             weatherDataForecastAsJson = await GetWeatherInfoJsonFromWeb("forecast/daily?q=" + city + "&cnt=5");
 
-            JObject jsonObjectForDailyWeatherList = JObject.Parse(weatherDataForecastAsJson as String);
-            ObservableCollection<WeatherDataDailyForecast> dailyForecastList = JsonConvert.DeserializeObject<ObservableCollection<WeatherDataDailyForecast>>(jsonObjectForDailyWeatherList["list"].ToString());
-
-            return dailyForecastList;
+            try
+            {
+                JObject jsonObjectForDailyWeatherList = JObject.Parse(weatherDataForecastAsJson as String);
+                ObservableCollection<WeatherDataDailyForecast> dailyForecastList =
+                    JsonConvert.DeserializeObject<ObservableCollection<WeatherDataDailyForecast>>(
+                        jsonObjectForDailyWeatherList["list"].ToString());
+                return dailyForecastList;
+            }
+            catch (JsonReaderException exception)
+            {
+                Debug.WriteLine(exception.ToString());
+                ErrorMessageWhileReadingJson();
+                return null;
+            }
+            catch (JsonSerializationException e)
+            {
+                Debug.WriteLine(e.ToString());
+                ErrorMessageWhileReadingJson();
+                return null;
+            }
         }
 
 
@@ -96,6 +129,16 @@ namespace WeatherDemo.Services
             }
 
             return null;
+        }
+
+        private static async void ErrorMessageWhileReadingJson()
+        {
+                var messageDialog =
+                    new MessageDialog(
+                        "Bei der Auswertung der aktuellen Wetterdaten ist ein Fehler aufegetreten. Ein erneutes Laden könnte dieses Problem beheben. Ansonsten melden Sie sich bitte bei den Entwicklern.",
+                        "Verarbeitungsfehler");
+                messageDialog.Commands.Add(new UICommand("Ok"));
+                await messageDialog.ShowAsync();
         }
     }
 }

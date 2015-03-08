@@ -44,40 +44,52 @@ namespace WeatherDemo
         /// </summary>
         /// <param name="e">Event data that describes how this page was reached.
         /// This parameter is typically used to configure the page.</param>
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             if (e.NavigationMode != NavigationMode.Back)
                 LoadLocalLocation();
         }
 
 
-        //TODO: zurück in MainViewModel, aber es kam eine Exception - aus Zeitgründen vorerst hierher verschoben
         private async void LoadLocalLocation()
         {
             await ShowLoading(true);
-            var localLocationAsXml = await LocalStorage.GetJsonFromLocalStorage("userLocation.xml");
-            if (localLocationAsXml == null || String.IsNullOrEmpty(localLocationAsXml))
-                return;
 
-            XmlDocument xmlLocations = new XmlDocument();
-            xmlLocations.LoadXml(localLocationAsXml);
-
-            var locationList = xmlLocations.SelectNodes("Locations/Location");
-
-            foreach (XmlElement xmlLocation in locationList)
+            if (App.IsInternetAvailable)
             {
-                string name = xmlLocation.SelectSingleNode("Name").InnerText.Trim();
-                string country = xmlLocation.SelectSingleNode("Country").InnerText.Trim();
-                var location = await Api.DownloadWeatherData("weather?q=" + name + "," + country);
+                var localLocationAsXml = await LocalStorage.GetJsonFromLocalStorage("userLocation.xml");
+                if (localLocationAsXml == null || String.IsNullOrEmpty(localLocationAsXml))
+                    return;
 
-                if (location == null)
+                XmlDocument xmlLocations = new XmlDocument();
+                xmlLocations.LoadXml(localLocationAsXml);
+
+                var locationList = xmlLocations.SelectNodes("Locations/Location");
+
+                foreach (XmlElement xmlLocation in locationList)
                 {
-                    location = new Location(name, country);
-                }
-                else
-                    location.Country = country;
+                    string name = xmlLocation.SelectSingleNode("Name").InnerText.Trim();
+                    string country = xmlLocation.SelectSingleNode("Country").InnerText.Trim();
+                    var location = await Api.DownloadWeatherData("weather?q=" + name + "," + country);
 
-                MainViewModel.Current.LocationCollection.Add(location);
+                    if (location == null)
+                    {
+                        location = new Location(name, country);
+                    }
+                    else
+                        location.Country = country;
+
+                    MainViewModel.Current.LocationCollection.Add(location);
+                }
+            }
+            else
+            {
+                var messageDialog =
+                    new MessageDialog(
+                        "Aktuelle Wetterdaten konnten nicht abgerufen werden. Anscheinend besteht keine Verbindung zum Internet.",
+                        "Aktualisierung fehlgeschlagen");
+                messageDialog.Commands.Add(new UICommand("Ok"));
+                await messageDialog.ShowAsync();
             }
             await ShowLoading(false);
         }
