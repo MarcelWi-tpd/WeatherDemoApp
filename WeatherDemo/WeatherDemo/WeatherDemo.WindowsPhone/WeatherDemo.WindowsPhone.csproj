@@ -98,7 +98,6 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Assets\Background\803.jpg" />
     <Content Include="Assets\Logo.scale-240.png" />
     <Content Include="Assets\SmallLogo.scale-240.png" />
     <Content Include="Assets\SplashScreen.scale-240.png" />
@@ -106,15 +105,6 @@
     <Content Include="Assets\StoreLogo.scale-240.png" />
     <Content Include="Assets\TileBackground\500.jpg" />
     <Content Include="Assets\TileBackground\803.jpg" />
-    <Content Include="Assets\TileIcon\14.png" />
-    <Content Include="Assets\TileIcon\17.png" />
-    <Content Include="Assets\TileIcon\18.png" />
-    <Content Include="Assets\TileIcon\2.png" />
-    <Content Include="Assets\TileIcon\21.png" />
-    <Content Include="Assets\TileIcon\23.png" />
-    <Content Include="Assets\TileIcon\24.png" />
-    <Content Include="Assets\TileIcon\25.png" />
-    <Content Include="Assets\TileIcon\8.png" />
     <Content Include="Assets\WideLogo.scale-240.png" />
   </ItemGroup>
   <ItemGroup>

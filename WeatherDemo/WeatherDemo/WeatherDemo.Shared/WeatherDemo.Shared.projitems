@@ -39,4 +39,16 @@
     <Compile Include="$(MSBuildThisFileDirectory)Views\AddLocation.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Views\WeatherDetails.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\Background\803.jpg" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\TileIcon\14.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\TileIcon\17.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\TileIcon\18.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\TileIcon\2.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\TileIcon\21.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\TileIcon\23.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\TileIcon\24.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\TileIcon\25.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Assets\TileIcon\8.png" />
+  </ItemGroup>
 </Project>

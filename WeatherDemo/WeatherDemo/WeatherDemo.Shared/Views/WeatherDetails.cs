@@ -18,8 +18,10 @@ namespace WeatherDemo.Views
         {
             this.navigationHelper.OnNavigatedTo(e);
 
+#if WINDOWS_PHONE_APP
             StatusBar statusBar = StatusBar.GetForCurrentView();
             await statusBar.HideAsync();
+#endif
 
             await ShowLoading(true);
             MainViewModel.Current.ThreeHourIntervalForecast = await Api.DownlaodForecastData(MainViewModel.Current.CurrentLocation.Name);
@@ -32,9 +34,10 @@ namespace WeatherDemo.Views
         {
             this.navigationHelper.OnNavigatedFrom(e);
 
-
+#if WINDOWS_PHONE_APP
             StatusBar statusBar = StatusBar.GetForCurrentView();
             await statusBar.ShowAsync();
+#endif
         }
 
         /// <summary>

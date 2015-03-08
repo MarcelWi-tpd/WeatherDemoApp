@@ -18,8 +18,8 @@
                 <Setter.Value>0.4</Setter.Value>
             </Setter>
         </Style>
-        
-        <Style x:Key="BackgroundImagePivotWP" TargetType="Pivot">
+
+        <Style x:Key="BackgroundImageGridWindows" TargetType="Grid">
             <Setter Property="Background">
                 <Setter.Value>
                     <ImageBrush Stretch="UniformToFill" ImageSource="ms-appx:///Assets/Background/803.jpg"/>
@@ -29,6 +29,6 @@
                 <Setter.Value>0.4</Setter.Value>
             </Setter>
         </Style>
-        
+
     </Application.Resources>
 </Application>

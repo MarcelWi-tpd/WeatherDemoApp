@@ -5,9 +5,107 @@
     xmlns:local="using:WeatherDemo"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    xmlns:converters="using:WeatherDemo.Converters"
+    mc:Ignorable="d"
+    RequestedTheme="Dark"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Page.Resources>
+        <converters:WeatherIdToIconSourceConverter x:Key="WeatherIdToIconSourceConverter"/>
+        <converters:IntToNegatedVisibilityConverter x:Key="IntToNegatedVisibilityConverter"/>
+        <converters:IntToVisibilityConverter x:Key="IntToVisibilityConverter"/>
 
+        <MenuFlyout x:Key="deleteLocation">
+            <MenuFlyoutItem x:Name="DeleteLocationFlayFlyoutItem" Text="Löschen" Click="DeleteLocationFlayFlyoutItem_Click"/>
+        </MenuFlyout>
+
+        <DataTemplate x:Key="LocationItemTemplate">
+            <Border BorderThickness="1" Margin="0,0,10,10" Holding="Border_Holding"  FlyoutBase.AttachedFlyout="{StaticResource deleteLocation}" Background="Black" Opacity="0.85">
+                <Grid Width="106" Height="106" >
+                    <Image x:Name="icon" Height="40" Width="40" Source="{Binding TodaysWeatherData.Weather[0].WeatherID, Converter={StaticResource WeatherIdToIconSourceConverter}}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,6"/>
+                    <TextBlock x:Name="tblPlace" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Bottom" TextAlignment="Left" Foreground="White" Margin="3,0,3,6" TextTrimming="None" Style="{StaticResource BaseTextBlockStyle}" LineHeight="12" FontSize="12" FontFamily="Segoe WP Light" FontWeight="SemiLight">
+                		<Run Text="{Binding Name}"/>
+                		<Run Text=", " />
+                		<Run Text="{Binding Country}"/>
+                    </TextBlock>
+                    <Grid HorizontalAlignment="Center" Margin="0,6,0,0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="tblTemp" HorizontalAlignment="Right" TextWrapping="Wrap" Margin="0,0,3,0" FontSize="18.667" Foreground="White" FontWeight="Bold" VerticalAlignment="Center" FontFamily="Segoe WP Light">
+                			<Run Text="{Binding TodaysWeatherData.Main.Temperature}" />
+                			<Run Text="°" />
+                        </TextBlock>
+                        <Grid HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Center">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="8*"/>
+                                <RowDefinition Height="3*"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock x:Name="tblTempMax" TextWrapping="Wrap" Foreground="White" VerticalAlignment="Center" Margin="0" FontSize="10.667" Height="21" FontFamily="Segoe WP Light">
+                				<Run Text="{Binding TodaysWeatherData.Main.MaxTemperature}" />
+                				<Run Text="°" />
+                            </TextBlock>
+                            <Border BorderBrush="White" BorderThickness="0,0,0,0.5" VerticalAlignment="Center" Grid.RowSpan="2" Margin="0,3,0,0"/>
+                            <TextBlock x:Name="tblTempMin" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Opacity="0.85" Margin="0" Foreground="White" FontSize="8" Grid.Row="1" FontFamily="Segoe WP Light">
+                				<Run Text="{Binding TodaysWeatherData.Main.MinTemperature}" />
+                				<Run Text="°" />
+                            </TextBlock>
+                        </Grid>
+                    </Grid>
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Page.DataContext>
+        <Binding Path="Current" Source="{StaticResource MainViewModel}"/>
+    </Page.DataContext>
+
+    <Page.BottomAppBar>
+        <CommandBar>
+            <AppBarButton x:Name="AddLocation" Label="Ort hinzufügen" Click="AddLocation_Click" Icon="Add"  />
+        </CommandBar>
+    </Page.BottomAppBar>
+
+    <Grid Style="{StaticResource BackgroundImageGridWindows}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid x:Name="HeaderGrid" Margin="120,40,12,40" VerticalAlignment="Top" Height="60">
+            <TextBlock x:Name="AppTitle" Style="{StaticResource HeaderTextBlockStyle}"  Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,12,0" Text="WETTERINFORMATIONEN" FontSize="56" FontWeight="Bold"/>
+        </Grid>
+
+
+
+        <Grid x:Name="LocationGrid" Grid.Row="1" Margin="120,6,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50*"/>
+                <RowDefinition Height="529*"/>
+            </Grid.RowDefinitions>
+            <TextBlock HorizontalAlignment="Left" TextWrapping="Wrap" Text="Meine Orte" VerticalAlignment="Top" Margin="0" FontSize="36" FontFamily="Segoe UI"/>
+            <TextBlock x:Name="NoLocationFoundMessage" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Top" Grid.Row="1" FontSize="24" Visibility="{Binding Current.LocationCollection.Count, Converter={StaticResource IntToNegatedVisibilityConverter}, Mode=OneWay}" Text="Keine Orte gefunden. Es müssen erst Orte angelegt werden, um hier aktuelle Informationen zum Wetter anzeigen zu lassen." FontFamily="Segoe UI"/>
+            <ListView x:Name="LocationListView" 
+				Grid.Row="1" 
+                ItemsSource="{Binding LocationCollection}" 
+                ItemTemplate="{StaticResource LocationItemTemplate}"
+                Visibility="{Binding Current.LocationCollection.Count, Converter={StaticResource IntToVisibilityConverter}, Mode=OneWay}"
+                IsItemClickEnabled="True" ItemClick="LocationListView_ItemClick" Margin="0">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <ItemsWrapGrid
+                            Orientation="Horizontal"
+                            Margin="0">
+                            <ItemsWrapGrid.ChildrenTransitions>
+                                <TransitionCollection>
+                                    <EntranceThemeTransition />
+                                </TransitionCollection>
+                            </ItemsWrapGrid.ChildrenTransitions>
+                        </ItemsWrapGrid>
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+            </ListView>
+        </Grid>
     </Grid>
 </Page>

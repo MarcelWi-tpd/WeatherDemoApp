@@ -16,6 +16,17 @@
         <converters:DateTimeToTimeStringConverter x:Key="DateTimeToTimeStringConverter"/>
         <converters:DateTimeToStringConverter x:Key="DateTimeToStringConverter" />
 
+        <Style x:Key="BackgroundImagePivotWP" TargetType="Pivot">
+            <Setter Property="Background">
+                <Setter.Value>
+                    <ImageBrush Stretch="UniformToFill" ImageSource="ms-appx:///Assets/Background/803.jpg"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Opacity">
+                <Setter.Value>0.4</Setter.Value>
+            </Setter>
+        </Style>
+
         <DataTemplate x:Key="ThreeHourForecastItemTemplate">
             <Border BorderThickness="1" Margin="0,0,0,24">
                 <Grid Margin="0" >
