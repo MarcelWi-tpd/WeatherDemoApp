@@ -57,7 +57,7 @@ namespace WeatherDemo.ViewModels
 
             if (Windows.ApplicationModel.DesignMode.DesignModeEnabled)
             {
-                var loc = new Location(0, "Cologne", "GER", new Coordinates(49, 122));
+                var loc = new Location("Cologne", "GER", new Coordinates(49, 122));
                 var main = new Main(276.71, 96, 1022.55, 275.59, 277.95);
                 var wind = new Wind(5.01, 259.504);
                 var sys = new Sys(1425363096, 1425402990, "Germany");

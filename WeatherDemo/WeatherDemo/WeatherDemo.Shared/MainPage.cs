@@ -75,9 +75,14 @@ namespace WeatherDemo
                     if (location == null)
                     {
                         location = new Location(name, country);
+                    } else 
+                        if(String.IsNullOrEmpty(location.Name))
+                    {
+                        location = await Api.DownloadWeatherData("weather?q=" + name);
+
                     }
-                    else
-                        location.Country = country;
+
+                    location.Country = country;
 
                     MainViewModel.Current.LocationCollection.Add(location);
                 }

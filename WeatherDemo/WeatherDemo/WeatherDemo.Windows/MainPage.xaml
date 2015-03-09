@@ -20,20 +20,20 @@
         </MenuFlyout>
 
         <DataTemplate x:Key="LocationItemTemplate">
-            <Border BorderThickness="1" Margin="0,0,10,10" Holding="Border_Holding"  FlyoutBase.AttachedFlyout="{StaticResource deleteLocation}" Background="Black" Opacity="0.85">
-                <Grid Width="106" Height="106" >
-                    <Image x:Name="icon" Height="40" Width="40" Source="{Binding TodaysWeatherData.Weather[0].WeatherID, Converter={StaticResource WeatherIdToIconSourceConverter}}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,6"/>
-                    <TextBlock x:Name="tblPlace" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Bottom" TextAlignment="Left" Foreground="White" Margin="3,0,3,6" TextTrimming="None" Style="{StaticResource BaseTextBlockStyle}" LineHeight="12" FontSize="12" FontFamily="Segoe WP Light" FontWeight="SemiLight">
+            <Border BorderThickness="1" Margin="0" Holding="Border_Holding"  FlyoutBase.AttachedFlyout="{StaticResource deleteLocation}" Background="Black" Opacity="0.85">
+                <Grid Width="250" Height="250" >
+                    <Image x:Name="icon" Height="100" Width="100" Source="{Binding TodaysWeatherData.Weather[0].WeatherID, Converter={StaticResource WeatherIdToIconSourceConverter}}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,12"/>
+                    <TextBlock x:Name="tblPlace" TextWrapping="WrapWholeWords" VerticalAlignment="Bottom" TextAlignment="Left" Foreground="White" Margin="6,0,6,12" TextTrimming="None" Style="{StaticResource BaseTextBlockStyle}" LineHeight="29.333" FontSize="29.333" FontFamily="Segoe UI" FontWeight="SemiLight" HorizontalAlignment="Center">
                 		<Run Text="{Binding Name}"/>
                 		<Run Text=", " />
                 		<Run Text="{Binding Country}"/>
                     </TextBlock>
-                    <Grid HorizontalAlignment="Center" Margin="0,6,0,0">
+                    <Grid Margin="0,12,0,0" VerticalAlignment="Center">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock x:Name="tblTemp" HorizontalAlignment="Right" TextWrapping="Wrap" Margin="0,0,3,0" FontSize="18.667" Foreground="White" FontWeight="Bold" VerticalAlignment="Center" FontFamily="Segoe WP Light">
+                        <TextBlock x:Name="tblTemp" HorizontalAlignment="Right" TextWrapping="Wrap" Margin="0,0,3,0" FontSize="29.333" Foreground="White" FontWeight="Bold" VerticalAlignment="Center" FontFamily="Segoe UI">
                 			<Run Text="{Binding TodaysWeatherData.Main.Temperature}" />
                 			<Run Text="°" />
                         </TextBlock>
@@ -42,12 +42,12 @@
                                 <RowDefinition Height="8*"/>
                                 <RowDefinition Height="3*"/>
                             </Grid.RowDefinitions>
-                            <TextBlock x:Name="tblTempMax" TextWrapping="Wrap" Foreground="White" VerticalAlignment="Center" Margin="0" FontSize="10.667" Height="21" FontFamily="Segoe WP Light">
+                            <TextBlock x:Name="tblTempMax" TextWrapping="Wrap" Foreground="White" VerticalAlignment="Center" Margin="0" FontSize="21.333" FontFamily="Segoe UI" FontWeight="Bold">
                 				<Run Text="{Binding TodaysWeatherData.Main.MaxTemperature}" />
                 				<Run Text="°" />
                             </TextBlock>
                             <Border BorderBrush="White" BorderThickness="0,0,0,0.5" VerticalAlignment="Center" Grid.RowSpan="2" Margin="0,3,0,0"/>
-                            <TextBlock x:Name="tblTempMin" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Opacity="0.85" Margin="0" Foreground="White" FontSize="8" Grid.Row="1" FontFamily="Segoe WP Light">
+                            <TextBlock x:Name="tblTempMin" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Opacity="0.85" Margin="0" Foreground="White" FontSize="18.667" Grid.Row="1" FontFamily="Segoe UI">
                 				<Run Text="{Binding TodaysWeatherData.Main.MinTemperature}" />
                 				<Run Text="°" />
                             </TextBlock>

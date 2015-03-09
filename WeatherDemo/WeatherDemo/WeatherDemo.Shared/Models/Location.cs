@@ -12,16 +12,6 @@ namespace WeatherDemo.Models
     {
 
         #region properties
-        private int _LocationId;
-        public int LocationId
-        {
-            get { return _LocationId; }
-            set
-            {
-                SetProperty(ref _LocationId, value);
-            }
-        }
-
         private string _Name;
         public string Name
         {
@@ -62,9 +52,8 @@ namespace WeatherDemo.Models
             Country = country;
         }
         #endregion
-        public Location(int locationId, string name, string country, Coordinates coord)
+        public Location(string name, string country, Coordinates coord)
         {
-            LocationId = locationId;
             Name = name;
             Country = country;
             Coord = coord;
