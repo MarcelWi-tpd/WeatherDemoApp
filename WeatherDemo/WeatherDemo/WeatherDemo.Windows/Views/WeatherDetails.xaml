@@ -333,7 +333,14 @@
                         IsRightTapEnabled="False" 
                         IsHoldingEnabled="False" 
                         IsDoubleTapEnabled="False"
-                        Margin="0,3,-20,20" Padding="0,0,20,0" />
+                        Margin="0,3,-20,20" Padding="0,0,20,0" >
+                        
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
                 </DataTemplate>
             </HubSection>
             <HubSection x:Name="DailyForecastData">
@@ -354,7 +361,14 @@
                         IsRightTapEnabled="False" 
                         IsHoldingEnabled="False" 
                         IsDoubleTapEnabled="False"
-                        Margin="0,3,-20,20" Padding="0,0,20,0"  />
+                        Margin="0,3,-20,20" Padding="0,0,20,0">
+                        
+                        <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
                 </DataTemplate>
             </HubSection>
         </Hub>

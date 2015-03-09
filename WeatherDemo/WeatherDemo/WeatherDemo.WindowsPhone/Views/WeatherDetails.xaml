@@ -269,7 +269,14 @@
                         ItemTemplate="{StaticResource ThreeHourForecastItemTemplate}"
                         IsItemClickEnabled="False"
                         Margin="0,3,-20,20" Padding="0,0,20,0" 
-                        Grid.Row="1"/>
+                        Grid.Row="1">
+
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
                 </Grid>
             </PivotItem>
             <PivotItem x:Name="DailyWeatherForecast">
@@ -289,7 +296,14 @@
                         ItemTemplate="{StaticResource DailyWeatherForecastItemTemplate}"
                         IsItemClickEnabled="False"
                         Margin="0,3,-20,20" Padding="0,0,20,0"
-                        Grid.Row="1"/>
+                        Grid.Row="1">
+
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                    </ListView>
                 </Grid>
             </PivotItem>
         </Pivot>
