@@ -85,6 +85,8 @@ namespace WeatherDemo.ViewModels
                 dailyForecast.WindSpeed = 7.79;
                 dailyForecast.Time = 1425466800;
 
+                DailyIntervalForecast.Add(dailyForecast);
+
             }
         }
     }

@@ -29,8 +29,8 @@
         </Style>
 
         <DataTemplate x:Key="ThreeHourForecastItemTemplate">
-            <Border BorderThickness="1" Margin="0,0,0,24">
-                <Grid Margin="0" >
+            <Border BorderThickness="5" Margin="0,0,0,24" BorderBrush="White" Background="Black" Opacity="0.85">
+                <Grid Margin="24" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
@@ -40,7 +40,7 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock x:Name="tblDescription" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Weather[0].Description}" VerticalAlignment="Center" FontSize="26.667" FontFamily="Segoe UI" Margin="0,6,0,12" Grid.Column="1"/>
+                    <TextBlock x:Name="tblDescription" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Weather[0].Description}" VerticalAlignment="Center" FontSize="32" FontFamily="Segoe UI" Margin="0,6,0,12" Grid.Column="1" FontWeight="Bold"/>
                     <TextBlock x:Name="tblDateTime" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Time, Converter={StaticResource DateTimeToStringConverter}}" VerticalAlignment="Center" Margin="0" Grid.Row="2" Grid.ColumnSpan="2" FontSize="26.667" FontFamily="Segoe UI"/>
                     <Image x:Name="icon" Height="75" Width="75" Source="{Binding Weather[0].WeatherID, Converter={StaticResource WeatherIdToIconSourceConverter}}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,5,0,15"/>
                     <Grid x:Name="TempGrid" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0" Grid.Row="1">
@@ -48,7 +48,7 @@
                             <ColumnDefinition/>
                             <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
-                        <TextBlock x:Name="tblTemp" HorizontalAlignment="Right" TextWrapping="Wrap" Margin="0,0,3,0" FontSize="26.667" Foreground="White" FontWeight="Bold" VerticalAlignment="Center" FontFamily="Segoe UI">
+                        <TextBlock x:Name="tblTemp" HorizontalAlignment="Right" TextWrapping="Wrap" Margin="0,0,3,0" FontSize="32" Foreground="White" FontWeight="Bold" VerticalAlignment="Center" FontFamily="Segoe UI">
                 			    <Run Text="{Binding Main.Temperature}" />
                 			    <Run Text="°" />
                         </TextBlock>
@@ -57,12 +57,12 @@
                                 <RowDefinition Height="8*"/>
                                 <RowDefinition Height="3*"/>
                             </Grid.RowDefinitions>
-                            <TextBlock x:Name="tblTempMax" TextWrapping="Wrap" Foreground="White" VerticalAlignment="Center" Margin="0" FontSize="18.667" Height="21" FontFamily="Segoe UI" FontWeight="Bold">
+                            <TextBlock x:Name="tblTempMax" TextWrapping="Wrap" Foreground="White" VerticalAlignment="Center" Margin="0" FontSize="24" FontFamily="Segoe UI" FontWeight="Bold">
                 				    <Run Text="{Binding Main.MaxTemperature}" />
                 				    <Run Text="°" />
                             </TextBlock>
                             <Border BorderBrush="White" BorderThickness="0,0,0,0.5" VerticalAlignment="Center" Grid.RowSpan="2" Margin="0,3,0,0"/>
-                            <TextBlock x:Name="tblTempMin" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Opacity="0.85" Margin="0,3,0,0" Foreground="White" FontSize="16" Grid.Row="1" FontFamily="Segoe UI">
+                            <TextBlock x:Name="tblTempMin" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Opacity="0.85" Margin="0,3,0,0" Foreground="White" FontSize="21.333" Grid.Row="1" FontFamily="Segoe UI">
                 				    <Run Text="{Binding Main.MinTemperature}" />
                 				    <Run Text="°" />
                             </TextBlock>
@@ -92,9 +92,11 @@
         </DataTemplate>
 
         <DataTemplate x:Name="DailyWeatherForecastItemTemplate">
-            <Border BorderThickness="1" Margin="0,0,0,24">
-                <Grid Margin="0" >
+            <Border BorderThickness="5" Margin="0,0,0,24" BorderBrush="White" Opacity="0.85" Background="Black">
+                <Grid Margin="24" >
                     <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition/>
@@ -103,53 +105,95 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock x:Name="tblDailyWeatherDescription" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Weather[0].Description}" VerticalAlignment="Center" FontSize="26.667" FontFamily="Segoe UI" Margin="0,6,0,12" Grid.Column="1"/>
-                    <TextBlock x:Name="tblDailyWeatherDateTime" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Time, Converter={StaticResource DateTimeToStringConverter}}" VerticalAlignment="Center" Margin="0" Grid.Row="2" Grid.ColumnSpan="2" FontSize="26.667" FontFamily="Segoe UI"/>
-                    <Image x:Name="dailyWeatherIcon" Height="75" Width="75" Source="{Binding Weather[0].WeatherID, Converter={StaticResource WeatherIdToIconSourceConverter}}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,5,0,15"/>
-                    <Grid x:Name="TempGrid" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="0" Grid.Row="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock x:Name="tblTemp" HorizontalAlignment="Right" TextWrapping="Wrap" Margin="0,0,6,0" FontSize="26.667" Foreground="White" FontWeight="Bold" VerticalAlignment="Center" FontFamily="Segoe UI">
-                			    <Run Text="{Binding Temp.DayTemperature}" />
-                			    <Run Text="°" />
-                        </TextBlock>
-                        <Grid HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Center">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="8*"/>
-                                <RowDefinition Height="3*"/>
-                            </Grid.RowDefinitions>
-                            <TextBlock x:Name="tblTempMax" TextWrapping="Wrap" Foreground="White" VerticalAlignment="Center" Margin="0" FontSize="18.667" FontFamily="Segoe UI" FontWeight="Bold">
-                				    <Run Text="{Binding Temp.MaxTemperature}" />
-                				    <Run Text="°" />
-                            </TextBlock>
-                            <Border BorderBrush="White" BorderThickness="0,0,0,0.5" VerticalAlignment="Center" Grid.RowSpan="2" Margin="0,3,0,0"/>
-                            <TextBlock x:Name="tblTempMin" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Opacity="0.85" Margin="0,3,0,0" Foreground="White" FontSize="16" Grid.Row="1" FontFamily="Segoe UI">
-                				    <Run Text="{Binding Temp.MinTemperature}" />
-                				    <Run Text="°" />
-                            </TextBlock>
-                        </Grid>
-                    </Grid>
-                    <Grid Grid.Column="1" Margin="6,0,0,0" VerticalAlignment="Center" Grid.Row="1" HorizontalAlignment="Right">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <TextBlock x:Name="tblForecastWind" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="26.667" Margin="0" FontWeight="Bold" Text="Wind"/>
-                        <Grid x:Name="ForecastWindDataGrid" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Margin="12,0,0,0">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="13*"/>
-                                <ColumnDefinition Width="31*"/>
-                                <ColumnDefinition Width="21*"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock x:Name="tblForecastWindData" TextWrapping="Wrap" FontSize="26.667" VerticalAlignment="Center" Margin="0" FontFamily="Segoe UI" HorizontalAlignment="Left" FontWeight="Bold">
-                				    <Run Text="{Binding WindSpeed, Converter={StaticResource MeterPerSecondToKilometerPerHourConverter}}" />
-                				    <Run Text="km/h" />
-                            </TextBlock>
-                            <TextBlock x:Name="tblForecastWindDegData" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding WindDegree, Converter={StaticResource WindDegreeConverter}}" VerticalAlignment="Center" Margin="3,0,0,0" Grid.Column="2" FontFamily="Segoe UI" FontSize="26.667" FontWeight="Bold"/>
-                        </Grid>
-                    </Grid>
+                    <TextBlock x:Name="tblDailyWeatherDateTime" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Time, Converter={StaticResource DateTimeToStringConverter}}" VerticalAlignment="Center" Margin="12,0,0,0" Grid.ColumnSpan="2" FontSize="48" FontFamily="Segoe UI"/>
+                	<TextBlock x:Name="tblDailyWeatherDescription" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Weather[0].Description}" VerticalAlignment="Center" FontSize="29.333" FontFamily="Segoe UI" Margin="0" Grid.Column="1" Grid.Row="1" FontWeight="Bold"/>
+                	<Image x:Name="dailyWeatherIcon" Height="75" Width="75" Source="{Binding Weather[0].WeatherID, Converter={StaticResource WeatherIdToIconSourceConverter}}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="12,24,6,0" Grid.Row="1"/>
+                	<Grid x:Name="TempGrid" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="12,0,0,0" Grid.Row="2">
+                		<Grid.ColumnDefinitions>
+                			<ColumnDefinition/>
+                			<ColumnDefinition/>
+                		</Grid.ColumnDefinitions>
+                		<TextBlock x:Name="tblTemp" HorizontalAlignment="Right" TextWrapping="Wrap" Margin="0,0,6,0" FontSize="34.667" Foreground="White" FontWeight="Bold" VerticalAlignment="Center" FontFamily="Segoe UI">
+                			<Run Text="{Binding Temp.DayTemperature}" />
+                			<Run Text="°" />
+                		</TextBlock>
+                		<Grid HorizontalAlignment="Left" Grid.Column="1" VerticalAlignment="Center">
+                			<Grid.RowDefinitions>
+                				<RowDefinition Height="8*"/>
+                				<RowDefinition Height="3*"/>
+                			</Grid.RowDefinitions>
+                			<TextBlock x:Name="tblTempMax" TextWrapping="Wrap" Foreground="White" VerticalAlignment="Center" Margin="0" FontSize="26.667" FontFamily="Segoe UI" FontWeight="Bold">
+                				<Run Text="{Binding Temp.MaxTemperature}" />
+                				<Run Text="°" />
+                			</TextBlock>
+                			<Border BorderBrush="White" BorderThickness="0,0,0,0.5" VerticalAlignment="Center" Grid.RowSpan="2" Margin="0,3,0,0"/>
+                			<TextBlock x:Name="tblTempMin" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" Opacity="0.85" Margin="0,3,0,0" Foreground="White" FontSize="24" Grid.Row="1" FontFamily="Segoe UI">
+                				<Run Text="{Binding Temp.MinTemperature}" />
+                				<Run Text="°" />
+                			</TextBlock>
+                		</Grid>
+                	</Grid>
+                	<Grid x:Name="DayTemperaturesGrid" Grid.Row="2" Margin="0,0,12,0" Grid.Column="1" HorizontalAlignment="Center">
+                		<Grid HorizontalAlignment="Right" VerticalAlignment="Top">
+                			<Grid.RowDefinitions>
+                				<RowDefinition Height="18*"/>
+                				<RowDefinition Height="7*"/>
+                				<RowDefinition Height="11*"/>
+                			</Grid.RowDefinitions>
+                			<Grid.ColumnDefinitions>
+                				<ColumnDefinition/>
+                				<ColumnDefinition Width="3*"/>
+                			</Grid.ColumnDefinitions>
+                			<TextBlock x:Name="tblMorningTemp" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Morning Temp:" VerticalAlignment="Top" FontFamily="Segoe UI" FontSize="26.667" FontWeight="Bold"/>
+                			<TextBlock x:Name="tblEveTemp" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Eve Temp:" VerticalAlignment="Top" FontFamily="Segoe UI" FontSize="26.667" Grid.Row="1"/>
+                			<TextBlock x:Name="tblNightTemp" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Night Temp:" VerticalAlignment="Top" FontFamily="Segoe UI" Grid.Row="2" FontSize="26.667"/>
+                			<TextBlock x:Name="tblMorningTempData" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="26.667" FontWeight="Bold" Margin="6,0,0,0" Grid.Column="1">
+                				<Run Text="{Binding Temp.MorningTemperature}" />
+                				<Run Text="°" />
+                			</TextBlock>
+                			<TextBlock x:Name="tblEveTempData" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="26.667" FontWeight="Bold" Margin="6,0,0,0" Grid.Column="1" Grid.Row="1">
+                				<Run Text="{Binding Temp.EveTemperature}" />
+                				<Run Text="°" />
+                			</TextBlock>
+                			<TextBlock x:Name="tblNightTempData" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="26.667" FontWeight="Bold" Margin="6,0,0,0" Grid.Column="1" Grid.Row="2">
+                				<Run Text="{Binding Temp.NightTemperature}" />
+                				<Run Text="°" />
+                			</TextBlock>
+                		</Grid>
+                	</Grid>
+                	<Grid x:Name="WindGrid" Margin="0" VerticalAlignment="Center" Grid.Row="3" HorizontalAlignment="Center" Grid.ColumnSpan="2">
+                		<Grid.ColumnDefinitions>
+                			<ColumnDefinition Width="Auto"/>
+                			<ColumnDefinition Width="Auto"/>
+                		</Grid.ColumnDefinitions>
+                		<TextBlock x:Name="tblForecastWind" HorizontalAlignment="Left" TextWrapping="Wrap" VerticalAlignment="Center" FontFamily="Segoe UI" FontSize="26.667" Margin="0" FontWeight="Bold" Text="Wind:"/>
+                		<Grid x:Name="ForecastWindDataGrid" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.Column="1" Margin="12,0,0,0">
+                			<Grid.ColumnDefinitions>
+                				<ColumnDefinition Width="13*"/>
+                				<ColumnDefinition Width="31*"/>
+                				<ColumnDefinition Width="21*"/>
+                			</Grid.ColumnDefinitions>
+                			<TextBlock x:Name="tblForecastWindData" TextWrapping="Wrap" FontSize="26.667" VerticalAlignment="Center" Margin="0" FontFamily="Segoe UI" HorizontalAlignment="Left" FontWeight="Bold">
+                				<Run Text="{Binding WindSpeed, Converter={StaticResource MeterPerSecondToKilometerPerHourConverter}}" />
+                				<Run Text="km/h" />
+                			</TextBlock>
+                			<TextBlock x:Name="tblForecastWindDegData" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding WindDegree, Converter={StaticResource WindDegreeConverter}}" VerticalAlignment="Center" Margin="3,0,0,0" Grid.Column="2" FontFamily="Segoe UI" FontSize="26.667" FontWeight="Bold"/>
+                		</Grid>
+                	</Grid>
+                	<Grid x:Name="HumidityPressureGrid" Grid.Row="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0">
+                		<Grid.RowDefinitions>
+                			<RowDefinition Height="Auto"/>
+                			<RowDefinition/>
+                		</Grid.RowDefinitions>
+                		<Grid.ColumnDefinitions>
+                			<ColumnDefinition Width="35*"/>
+                			<ColumnDefinition Width="73*"/>
+                		</Grid.ColumnDefinitions>
+                		<TextBlock x:Name="tblHumidity" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Humidity:" VerticalAlignment="Top" FontFamily="Segoe UI" FontSize="26.667"/>
+                		<TextBlock x:Name="tblPressure" HorizontalAlignment="Left" TextWrapping="Wrap" Text="Pressure:" VerticalAlignment="Top" FontSize="26.667" Grid.Row="1"/>
+                		<TextBlock x:Name="tblHumidityData" HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding Humidity}" VerticalAlignment="Top" FontFamily="Segoe UI" FontSize="26.667" Grid.Column="1" Margin="12,0,0,0"/>
+                		<TextBlock x:Name="tblPressureData" HorizontalAlignment="Right" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="26.667" Grid.Row="1" Grid.Column="1" Text="{Binding Pressure}" Margin="12,0,0,0"/>
+                	</Grid>
                 </Grid>
             </Border>
         </DataTemplate>
@@ -194,7 +238,7 @@
                                 <RowDefinition Height="Auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
-                            <TextBlock x:Name="tblWeatherDescr" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Current.CurrentLocation.TodaysWeatherData.Weather[0].Description}" VerticalAlignment="Top" Grid.Row="1" FontSize="24" FontFamily="Segoe UI" Margin="0,3,0,12"/>
+                            <TextBlock x:Name="tblWeatherDescr" HorizontalAlignment="Center" TextWrapping="Wrap" Text="{Binding Current.CurrentLocation.TodaysWeatherData.Weather[0].Description}" VerticalAlignment="Top" Grid.Row="1" FontSize="32" FontFamily="Segoe UI" Margin="0,3,0,12" FontWeight="Bold"/>
                             
                             <Grid VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Margin="0,24,0,0">
                                 <Grid.ColumnDefinitions>

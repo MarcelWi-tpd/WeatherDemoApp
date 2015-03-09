@@ -20,7 +20,7 @@
         </MenuFlyout>
 
         <DataTemplate x:Key="LocationItemTemplate">
-            <Border BorderThickness="1" Margin="0" Holding="Border_Holding"  FlyoutBase.AttachedFlyout="{StaticResource deleteLocation}" Background="Black" Opacity="0.85">
+            <Border BorderThickness="5" Margin="0" Holding="Border_Holding"  FlyoutBase.AttachedFlyout="{StaticResource deleteLocation}" Opacity="0.85" BorderBrush="White" Background="Black">
                 <Grid Width="250" Height="250" >
                     <Image x:Name="icon" Height="100" Width="100" Source="{Binding TodaysWeatherData.Weather[0].WeatherID, Converter={StaticResource WeatherIdToIconSourceConverter}}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,12"/>
                     <TextBlock x:Name="tblPlace" TextWrapping="WrapWholeWords" VerticalAlignment="Bottom" TextAlignment="Left" Foreground="White" Margin="6,0,6,12" TextTrimming="None" Style="{StaticResource BaseTextBlockStyle}" LineHeight="29.333" FontSize="29.333" FontFamily="Segoe UI" FontWeight="SemiLight" HorizontalAlignment="Center">
