@@ -19,7 +19,7 @@
         </MenuFlyout>
 
         <DataTemplate x:Key="LocationItemTemplate">
-            <Border BorderThickness="3" Margin="0,0,10,10" Holding="Border_Holding"  FlyoutBase.AttachedFlyout="{StaticResource deleteLocation}" Background="Black" Opacity="0.85" BorderBrush="White">
+            <Border BorderThickness="3" Margin="0,0,10,10" Holding="Border_Holding"  FlyoutBase.AttachedFlyout="{StaticResource deleteLocation}" Background="Black" Opacity="0.6" BorderBrush="White">
                 <Grid Width="106" Height="106" >
                     <Image x:Name="icon" Height="40" Width="40" Source="{Binding TodaysWeatherData.Weather[0].WeatherID, Converter={StaticResource WeatherIdToIconSourceConverter}}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,6"/>
                     <TextBlock x:Name="tblPlace" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Bottom" TextAlignment="Left" Foreground="White" Margin="3,0,3,6" TextTrimming="None" Style="{StaticResource BaseTextBlockStyle}" LineHeight="12" FontSize="12" FontFamily="Segoe WP Light" FontWeight="SemiLight">
@@ -62,16 +62,19 @@
     </Page.DataContext>
     
     <Page.BottomAppBar>
-        <CommandBar Foreground="Black" Background="White">
+        <CommandBar RequestedTheme="Light">
             <AppBarButton x:Name="AddLocation" Label="Ort hinzufügen" Click="AddLocation_Click" Icon="Add"  />
         </CommandBar>
     </Page.BottomAppBar>
 
-    <Grid x:Name="RootGrid" Style="{StaticResource BackgroundImageGridWP}">
+    <Grid x:Name="RootGrid">
         <Grid.RowDefinitions>
 			<RowDefinition Height="60*"/>
 			<RowDefinition Height="578*"/>
 		</Grid.RowDefinitions>
+
+        <Grid x:Name="BackgroundGrid"  Style="{StaticResource BackgroundImageGridWP}" Grid.RowSpan="2" />
+        
 		<Grid x:Name="HeaderGrid" Margin="12,0" VerticalAlignment="Top" Height="60">
 			<TextBlock x:Name="AppTitle" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,12,0" Text="WETTERINFORMATIONEN" FontSize="16" FontWeight="Bold" FontFamily="Segoe WP Light"/>
 		</Grid>

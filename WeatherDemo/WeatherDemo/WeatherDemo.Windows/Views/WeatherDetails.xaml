@@ -17,19 +17,8 @@
         <converters:DateTimeToTimeStringConverter x:Key="DateTimeToTimeStringConverter"/>
         <converters:DateTimeToStringConverter x:Key="DateTimeToStringConverter" />
 
-        <Style x:Key="BackgroundImageHubWindows" TargetType="Hub">
-            <Setter Property="Background">
-                <Setter.Value>
-                    <ImageBrush Stretch="UniformToFill" ImageSource="ms-appx:///Assets/Background/803.jpg"/>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="Opacity">
-                <Setter.Value>0.4</Setter.Value>
-            </Setter>
-        </Style>
-
         <DataTemplate x:Key="ThreeHourForecastItemTemplate">
-            <Border BorderThickness="5" Margin="0,0,0,24" BorderBrush="White" Background="Black" Opacity="0.85">
+            <Border BorderThickness="5" Margin="0,0,0,24" BorderBrush="White" Background="Black" Opacity="0.6">
                 <Grid Margin="24" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -92,7 +81,7 @@
         </DataTemplate>
 
         <DataTemplate x:Name="DailyWeatherForecastItemTemplate">
-            <Border BorderThickness="5" Margin="0,0,0,24" BorderBrush="White" Opacity="0.85" Background="Black">
+            <Border BorderThickness="5" Margin="0,0,0,24" BorderBrush="White" Opacity="0.6" Background="Black">
                 <Grid Margin="24" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -204,7 +193,10 @@
     </Page.DataContext>
 
     <Grid>
-        <Hub Style="{StaticResource BackgroundImageHubWindows}">
+
+        <Grid x:Name="BackgroundGrid" Style="{StaticResource BackgroundImageGridWindows}" Grid.RowSpan="2" />
+
+        <Hub>
             <Hub.Header>
                 <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
                     <Button x:Name="backButton" Margin="40,12,40,0" Command="{Binding NavigationHelper.GoBackCommand, ElementName=pageRoot}"

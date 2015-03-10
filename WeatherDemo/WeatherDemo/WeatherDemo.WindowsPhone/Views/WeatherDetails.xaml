@@ -16,19 +16,8 @@
         <converters:DateTimeToTimeStringConverter x:Key="DateTimeToTimeStringConverter"/>
         <converters:DateTimeToStringConverter x:Key="DateTimeToStringConverter" />
 
-        <Style x:Key="BackgroundImagePivotWP" TargetType="Pivot">
-            <Setter Property="Background">
-                <Setter.Value>
-                    <ImageBrush Stretch="UniformToFill" ImageSource="ms-appx:///Assets/Background/803.jpg"/>
-                </Setter.Value>
-            </Setter>
-            <Setter Property="Opacity">
-                <Setter.Value>0.4</Setter.Value>
-            </Setter>
-        </Style>
-
         <DataTemplate x:Key="ThreeHourForecastItemTemplate">
-            <Border BorderThickness="3" Margin="0,0,0,24" BorderBrush="White" Background="Black" Opacity="0.85">
+            <Border BorderThickness="3" Margin="0,0,0,24" BorderBrush="White" Background="Black" Opacity="0.6">
                 <Grid Margin="12" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -90,7 +79,7 @@
             </Border>
         </DataTemplate>
         <DataTemplate x:Name="DailyWeatherForecastItemTemplate">
-            <Border BorderThickness="3" Margin="0,0,0,12" BorderBrush="White" Opacity="0.85" Background="Black">
+            <Border BorderThickness="3" Margin="0,0,0,12" BorderBrush="White" Opacity="0.6" Background="Black">
                 <Grid Margin="12" >
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
@@ -203,7 +192,10 @@
 
 
     <Grid x:Name="RootGrid">
-        <Pivot Style="{StaticResource BackgroundImagePivotWP}">
+
+        <Grid x:Name="BackgroundGrid"  Style="{StaticResource BackgroundImageGridWP}" Grid.RowSpan="2" />
+
+        <Pivot>
             <PivotItem x:Name="todaysWeatherDataHub">
                 <Grid x:Name="hubRootGrid">
                     <Grid.RowDefinitions>

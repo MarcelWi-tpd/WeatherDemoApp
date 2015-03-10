@@ -11,18 +11,21 @@
 
 
     <Page.BottomAppBar>
-        <CommandBar Foreground="Black" Background="White">
+        <CommandBar RequestedTheme="Light">
             <AppBarButton x:Name="Save" Label="speichern" Icon="Save" Click="Save_Click"  />
             <AppBarButton x:Name="CurrentLocation" Label="Ortung" Icon="Map" Click="CurrentLocation_Click"  />
             <AppBarButton x:Name="Cancel" Label="abbrechen" Icon="Cancel" Click="Cancel_Click"  />
         </CommandBar>
     </Page.BottomAppBar>
 
-    <Grid x:Name="RootGrid" Style="{StaticResource BackgroundImageGridWP}">
+    <Grid x:Name="RootGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="60*"/>
             <RowDefinition Height="578*"/>
         </Grid.RowDefinitions>
+
+        <Grid x:Name="BackgroundGrid"  Style="{StaticResource BackgroundImageGridWP}" Grid.RowSpan="2" />
+        
         <Grid x:Name="HeaderGrid" Margin="12,0" VerticalAlignment="Top" Height="60">
             <TextBlock x:Name="AppTitle" Height="Auto" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,0,12,0" Text="WETTERINFORMATIONEN" FontSize="16" FontWeight="Bold" FontFamily="Segoe WP Light"/>
         </Grid>

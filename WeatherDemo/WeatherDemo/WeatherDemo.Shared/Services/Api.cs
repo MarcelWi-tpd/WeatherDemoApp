@@ -58,6 +58,9 @@ namespace WeatherDemo.Services
 
             weatherDataForecastAsJson = await GetWeatherInfoJsonFromWeb("forecast?q=" + city);
 
+            if (weatherDataForecastAsJson == null)
+                return null;
+
             try
             {
                 JObject jsonObjectForWeatherList = JObject.Parse(weatherDataForecastAsJson as String);
@@ -83,6 +86,9 @@ namespace WeatherDemo.Services
             var weatherDataForecastAsJson = new object();
 
             weatherDataForecastAsJson = await GetWeatherInfoJsonFromWeb("forecast/daily?q=" + city + "&cnt=5");
+
+            if (weatherDataForecastAsJson == null)
+                return null;
 
             try
             {
@@ -122,8 +128,22 @@ namespace WeatherDemo.Services
                     var responseString = await response.Content.ReadAsStringAsync();
                     return responseString;
                 }
-                catch (WebException)
+                catch (HttpRequestException e)
                 {
+                    Debug.WriteLine(e.ToString());
+                    ErrorMessageWhileReadingJson();
+                    return null;
+                }
+                catch (WebException e)
+                {
+                    Debug.WriteLine(e.ToString());
+                    ErrorMessageWhileReadingJson();
+                    return null;
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine(e.ToString());
+                    ErrorMessageWhileReadingJson();
                     return null;
                 }
             }

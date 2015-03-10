@@ -28,9 +28,9 @@ namespace WeatherDemo.Views
             if (App.IsInternetAvailable)
             {
                 MainViewModel.Current.ThreeHourIntervalForecast =
-                    await Api.DownlaodForecastData(MainViewModel.Current.CurrentLocation.Name);
+                    await Api.DownlaodForecastData(MainViewModel.Current.CurrentLocation.Name + "," + MainViewModel.Current.CurrentLocation.Country);
                 MainViewModel.Current.DailyIntervalForecast =
-                    await Api.DownlaodDailyForecastData(MainViewModel.Current.CurrentLocation.Name);
+                    await Api.DownlaodDailyForecastData(MainViewModel.Current.CurrentLocation.Name + "," + MainViewModel.Current.CurrentLocation.Country);
             }
             else
             {

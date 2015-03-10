@@ -84,9 +84,13 @@ namespace WeatherDemo.Views
             {
                 string query = "";
                 if (!String.IsNullOrEmpty(tbxPlace.Text.Trim()))
+                {
                     query = tbxPlace.Text.Trim();
+                }
                 else
-                    query = tbxPlz.Text.Trim();
+                {
+                    query = tbxPlz.Text.Trim() + ",DE";
+                }
 
                 var location = await Api.DownloadWeatherData("weather?q=" + query);
 

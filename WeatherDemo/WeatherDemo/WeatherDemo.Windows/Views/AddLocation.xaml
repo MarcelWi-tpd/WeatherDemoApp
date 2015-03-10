@@ -11,18 +11,21 @@
 
 
     <Page.BottomAppBar>
-        <CommandBar>
+        <CommandBar RequestedTheme="Light" IsOpen="True" IsSticky="True">
             <AppBarButton x:Name="Save" Label="speichern" Icon="Save" Click="Save_Click"  />
             <AppBarButton x:Name="CurrentLocation" Label="Ortung" Icon="Map" Click="CurrentLocation_Click"  />
             <AppBarButton x:Name="Cancel" Label="abbrechen" Icon="Cancel" Click="Cancel_Click"  />
         </CommandBar>
     </Page.BottomAppBar>
 
-    <Grid Style="{StaticResource BackgroundImageGridWindows}">
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition />
         </Grid.RowDefinitions>
+
+        <Grid x:Name="BackgroundGrid" Style="{StaticResource BackgroundImageGridWindows}" Grid.RowSpan="2" />
+
         <Grid x:Name="HeaderGrid" Margin="0,10,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="120"/>
